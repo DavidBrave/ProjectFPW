@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'MainController@home');
-
+Route::get('/about', 'MainController@about');
 Route::get("/login", "LoginController@ShowLogin");
