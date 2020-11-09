@@ -8,5 +8,5 @@
     }
 </style>
 <div id="footer">
-    <p>Copyright © 2019  Smart Course. All rights reserved.  Kursus Bimbel Surabaya</p>
+    <p>Copyright © 2020  Smart Course. All rights reserved.  Kursus Bimbel Surabaya</p>
 </div>
