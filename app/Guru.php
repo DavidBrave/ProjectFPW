@@ -17,7 +17,8 @@ class Guru extends Model
         "Guru_Nama",
         "Guru_Email",
         "Guru_Alamat",
-        "Lampiran"
+        "Lampiran",
+        "Diterima"
     ];
 
     public function les()
