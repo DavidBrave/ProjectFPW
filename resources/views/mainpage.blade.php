@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Smart Course</title>
     <link rel="stylesheet" href="{{asset("materialize/css/materialize.css")}}">
+    <link rel="stylesheet" href="{{asset("jquery.js")}}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
