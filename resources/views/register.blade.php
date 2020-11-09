@@ -47,12 +47,9 @@
             color: #ff8282;
         }
     </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css%22%3E">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js%22%3E"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js%22%3E"></script>
     <script>
         $(document).ready(function () {
-            $('select').formSelect();
+            $('select').material_select();
 
             $("#pengajar").click(function () {
                 $("#pengajar").css("color", " #ff8282");
@@ -67,8 +64,6 @@
                 $("#form-pelajar").toggle();
                 $("#form-pengajar").hide();
             });
-
-
         });
     </script>
     <div id="register-container">
@@ -87,10 +82,10 @@
                 Email: <input type="text" name="email" placeholder="Type your email"><br>
                 Password: <input type="password" name="password" placeholder="Type your password"><br>
                 Confirm Password: <input type="password" name="confirm" placeholder="Type your password again"><br><br>
+                Tingkatan:
                 <div class="input-field col s12">
-                    Tingkatan:
                     <select name="tingkat">
-                        <option value="" disabled selected>Choose your option</option>
+                        <option value="none" disabled selected>Choose your option</option>
                         @isset($tingkat)
                             @foreach ($tingkat as $item)
                                 <option value="{{$item->Pendidikan_ID}}">{{$item->Pendidikan_Keterangan}}</option>
