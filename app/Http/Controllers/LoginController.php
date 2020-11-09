@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tingkat;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -18,7 +19,8 @@ class LoginController extends Controller
 
     public function showRegister()
     {
-        return view("register");
+        $data = Tingkat::select('*')->get();
+        return view("register", ["tingkat"=>$data]);
     }
 
     public function registerPelajar(Request $request)
