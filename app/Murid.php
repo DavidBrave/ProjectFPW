@@ -18,4 +18,9 @@ class Murid extends Model
         "Murid_Tingkat",
         "Murid_Email"
     ];
+
+    public function pengambilan()
+    {
+        return $this->belongsToMany(Les::class, "Pengambilan_Pelajaran", "Pengambilan_Murid", "Pengambilan_Les");
+    }
 }
