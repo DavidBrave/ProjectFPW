@@ -3,12 +3,12 @@
     <style>
         #container{
             display: grid;
-            grid-template-rows: 120px 950px 100px;
+            grid-template-rows: 120px auto 100px;
         }
         #register-container{
             background-color:white;
             width: 500px;
-            height: 950px;
+            height: auto;
             margin-left: auto;
             margin-right: auto;
             margin-top: 50px;
@@ -46,6 +46,27 @@
         #pelajar{
             color: #ff8282;
         }
+        #kotak{
+            height: 100px;
+            width: 100px;
+            margin-bottom: 10px;
+            background-size: 80px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url("Images/nophoto.png");
+            background-color: gray;
+        }
+
+        #kotak2{
+            height: 100px;
+            width: 100px;
+            margin-bottom: 10px;
+            background-size: 80px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url("Images/nophoto.png");
+            background-color: gray;
+        }
     </style>
     <script>
         $(document).ready(function () {
@@ -64,6 +85,26 @@
                 $("#form-pelajar").toggle();
                 $("#form-pengajar").hide();
             });
+
+            $("#imgfile").change(function () {
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(document.getElementById("imgfile").files[0]);
+
+                oFReader.onload = function (oFREvent) {
+                    $("#kotak").css("background-image", "url('" + oFREvent.target.result + "')");
+                    $("#kotak").css("background-size", "cover");
+                };
+            });
+
+            $("#imgfile2").change(function () {
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(document.getElementById("imgfile2").files[0]);
+
+                oFReader.onload = function (oFREvent) {
+                    $("#kotak2").css("background-image", "url('" + oFREvent.target.result + "')");
+                    $("#kotak2").css("background-size", "cover");
+                };
+            });
         });
     </script>
     <div id="register-container">
@@ -75,8 +116,11 @@
         <hr>
         <br><br>
         <div id="form-pelajar">
-            <form action="#" method="post">
+            <form action="/register_pelajar" method="post">
                 @csrf
+                <div id="kotak"></div>
+                Photo: <br><br>
+                <input type="file" name="imgfile" id="imgfile"><br><br>
                 Username: <input type="text" name="username" placeholder="Type your username"><br>
                 Name: <input type="text" name="name" placeholder="Type your name"><br>
                 Email: <input type="text" name="email" placeholder="Type your email"><br>
@@ -97,8 +141,11 @@
             </form>
         </div>
         <div id="form-pengajar" hidden>
-            <form action="#" method="post">
+            <form action="register_pengajar" method="post">
                 @csrf
+                <div id="kotak2"></div>
+                Photo: <br><br>
+                <input type="file" name="imgfile" id="imgfile2"><br><br>
                 Username: <input type="text" name="username" placeholder="Type your username"><br>
                 Name: <input type="text" name="name" placeholder="Type your name"><br>
                 Email: <input type="text" name="email" placeholder="Type your email"><br>

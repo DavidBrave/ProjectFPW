@@ -21,6 +21,11 @@
         grid-template-rows: 120px 900px 100px;
     }
 </style>
+<script>
+    $(document).ready(function () {
+
+    });
+</script>
 <body>
     <div id="container">
         @include('includes.header')
