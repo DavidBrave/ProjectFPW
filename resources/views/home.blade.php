@@ -46,7 +46,7 @@
         }
     </style>
     <div id="home-container">
-        <img src="{{asset("Photos/smartcourse.jpg")}}" alt="" style="width: 650px; height: 400px;"/>
+        <img src="{{asset("Images/smartcourse.jpg")}}" alt="" style="width: 650px; height: 400px;"/>
         <div id="info-container">
             <div class="kotak-info" id="about-info">
                 <p class="info-title">Smart Course</p>
