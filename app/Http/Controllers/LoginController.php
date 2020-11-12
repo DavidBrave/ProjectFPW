@@ -50,4 +50,10 @@ class LoginController extends Controller
     {
 
     }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget(["muridLogin", "guruLogin", "adminLogin"]);
+        return redirect("/about");
+    }
 }

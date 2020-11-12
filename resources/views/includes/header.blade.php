@@ -4,6 +4,7 @@
         padding: 10px;
         position: sticky;
         top: 0px;
+        z-index: 1;
     }
     #logo{
         float: left;
@@ -38,7 +39,6 @@
     }
     .account{
         float: right;
-        border: 1px solid #8fc2e2;
         margin-top: 20px;
         margin-right: 10px;
         border-radius: 30px;
@@ -54,31 +54,58 @@
         margin-top: 5px;
     }
 </style>
-<div id="header">
+@if (session("dark") == "false" || session("dark") == null)
+    <div id="header">
+@else
+    <div id="header" style="background-color: rgb(43, 40, 40)">
+@endif
     <img src="{{asset("Images/logo.png")}}" alt="" id="logo">
     <p id="course_name">Smart Course</p>
     @if (session("muridLogin"))
-        <a href="">
-            <div class="account" id="murid">
-                <img src="{{asset("Images/nophoto.png")}}" alt="" style="width: 40px; height: 40px; float: right;">
+        <a href="javascript:void(0)">
+            @if (session("dark") == "false" || session("dark") == null)
+                <div class="account">
+            @else
+                <div class="account" style="background-color: #616161;">
+            @endif
+                @if (session("muridLogin")[0]->Murid_Photo)
+                    <img src="{{asset("storage/Photos/".session('muridLogin')[0]->Murid_Photo)}}" alt="" style="width: 40px; height: 40px; float: right; border-radius: 50%;">
+                @else
+                    <img src="{{asset("storage/Photos/nophoto.png")}}" alt="" style="width: 40px; height: 40px; float: right;">
+                @endif
+                <i class="material-icons" style="line-height: 40px;">expand_more</i>
                 <p class="txt-name">{{session("muridLogin")[0]->Murid_Nama}}</p>
             </div>
         </a>
     @endif
 
     @if (session("guruLogin"))
-        <a href="">
-            <div class="account" id="guru">
-                <img src="{{asset("Images/nophoto.png")}}" alt="" style="width: 40px; height: 40px; float: right;">
+        <a href="javascript:void(0)">
+            @if (session("dark") == "false" || session("dark") == null)
+                <div class="account">
+            @else
+                <div class="account" style="background-color: #616161;">
+            @endif
+                @if (session("guruLogin")[0]->Guru_Photo)
+                    <img src="{{asset("storage/Photos/".session('guruLogin')[0]->Guru_Photo)}}" alt="" style="width: 40px; height: 40px; float: right; border-radius: 50%;">
+                @else
+                    <img src="{{asset("storage/Photos/nophoto.png")}}" alt="" style="width: 40px; height: 40px; float: right;">
+                @endif
+                <i class="material-icons" style="line-height: 40px;">expand_more</i>
                 <p class="txt-name">{{session("guruLogin")[0]->Guru_Nama}}</p>
             </div>
         </a>
     @endif
 
     @if (session("adminLogin"))
-        <a href="">
-            <div class="account" id="admin">
+        <a href="javascript:void(0)">
+            @if (session("dark") == "false" || session("dark") == null)
+                <div class="account">
+            @else
+                <div class="account" style="background-color: #616161;">
+            @endif
                 <img src="{{asset("Images/nophoto.png")}}" alt="" style="width: 40px; height: 40px; float: right;">
+                <i class="material-icons" style="line-height: 40px;">expand_more</i>
                 <p class="txt-name">{{session("adminLogin")[0]->Admin_Nama}}</p>
             </div>
         </a>
