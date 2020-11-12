@@ -50,7 +50,30 @@
     @else
         <div id="home-container" style="background-color: #9e9e9e;">
     @endif
-        <img src="{{asset("Images/smartcourse.jpg")}}" alt="" style="width: 650px; height: 400px;"/>
+        <div class="slider">
+            <ul class="slides">
+                <li>
+                    <img src="{{asset("Images/smartcourse.jpg")}}" alt="" style="width: 650px; height: 400px;"/>
+                </li>
+                <li>
+                    <img src="{{asset("Images/image.png")}}" alt="" style="width: 650px; height: 400px;"/>
+                </li>
+                <li>
+                    <img src="{{asset("Images/image2.jpg")}}" alt="" style="width: 650px; height: 400px; opacity: 0.5;"/>
+                    <div class="caption right-align" style="color: white">
+                        <h3>Group Chat</h3>
+                        <h5>Materi akan dibagikan pada group chat kelas.</h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="{{asset("Images/image3.jpeg")}}" alt="" style="width: 650px; height: 400px; opacity: 0.5;"/>
+                    <div class="caption center-align" style="color: white;">
+                        <h3>Pembelajaran</h3>
+                        <h5>Belajar menjadi semakin efektif</h5>
+                    </div>
+                </li>
+            </ul>
+        </div>
         <div id="info-container">
             <div class="kotak-info" id="about-info">
                 <p class="info-title">Smart Course</p>

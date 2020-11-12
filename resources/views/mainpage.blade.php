@@ -59,6 +59,10 @@
 </style>
 <script>
     $(document).ready(function () {
+        $('.slider').slider({
+            interval : 3000
+        });
+
         $(".account").click(function () {
             $("#menu").toggle();
         });
