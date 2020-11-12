@@ -45,7 +45,11 @@
             background-color: #14d9b5;
         }
     </style>
-    <div id="home-container">
+    @if (session("dark") == "false" || session("dark") == null)
+        <div id="home-container">
+    @else
+        <div id="home-container" style="background-color: #9e9e9e;">
+    @endif
         <img src="{{asset("Images/smartcourse.jpg")}}" alt="" style="width: 650px; height: 400px;"/>
         <div id="info-container">
             <div class="kotak-info" id="about-info">
