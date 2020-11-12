@@ -4,7 +4,7 @@
         padding: 10px;
         position: sticky;
         top: 0px;
-        z-index: 1;
+        z-index: 999;
     }
     #logo{
         float: left;
