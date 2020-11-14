@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Guru extends Model
+class Guru extends Authenticatable
 {
     public $table = "Guru";
     public $primaryKey = "Guru_ID";
@@ -18,11 +19,16 @@ class Guru extends Model
         "Guru_Email",
         "Guru_Alamat",
         "Lampiran",
-        "Diterima"
+        "Diterima",
+        "Guru_Photo"
     ];
 
     public function les()
     {
         return $this->hasMany(Les::class, "Guru_ID");
+    }
+
+    public function getAuthPassword(){
+        return $this->Admin_Password;
     }
 }

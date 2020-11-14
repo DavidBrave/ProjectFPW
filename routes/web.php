@@ -17,3 +17,6 @@ Route::get('/', 'MainController@home');
 Route::get('/about', 'MainController@about');
 Route::get("/login", "LoginController@ShowLogin");
 Route::get("/register", "LoginController@showRegister");
+Route::post("/melakukanlogin", "LoginController@Login");
+Route::post("/registerpelajar", "LoginController@registerMurid");
+Route::post("/registerguru","LoginController@registerPengajar");

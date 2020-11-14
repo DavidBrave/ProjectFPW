@@ -80,13 +80,28 @@
         <hr>
         <br><br>
         <div id="form-pelajar">
-            <form action="#" method="post">
+            <form action="/registerpelajar" method="post">
                 @csrf
                 Username: <input type="text" name="username" placeholder="Type your username"><br>
+                @error('username')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Name: <input type="text" name="name" placeholder="Type your name"><br>
+                @error('name')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Email: <input type="text" name="email" placeholder="Type your email"><br>
+                @error('email')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Password: <input type="password" name="password" placeholder="Type your password"><br>
+                @error('password')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Confirm Password: <input type="password" name="confirm" placeholder="Type your password again"><br><br>
+                @error('confirm')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 <div class="input-field col s12">
                     Tingkatan:
                     <select name="tingkat">
@@ -102,7 +117,7 @@
             </form>
         </div>
         <div id="form-pengajar" hidden>
-            <form action="#" method="post">
+            <form action="/registerguru" method="post">
                 @csrf
                 Username: <input type="text" name="username" placeholder="Type your username"><br>
                 Name: <input type="text" name="name" placeholder="Type your name"><br>

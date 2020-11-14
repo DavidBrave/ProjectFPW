@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Murid extends Model
+class Murid extends Authenticatable
 {
     public $table = "Murid";
     public $primaryKey = "Murid_ID";
@@ -16,6 +17,11 @@ class Murid extends Model
         "Murid_Password",
         "Murid_Nama",
         "Murid_Tingkat",
-        "Murid_Email"
+        "Murid_Email",
+        "Murid_Photo"
     ];
+
+    public function getAuthPassword(){
+        return $this->Murid_Password;
+    }
 }
