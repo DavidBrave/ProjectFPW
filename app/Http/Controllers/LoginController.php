@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Guru;
 use App\Murid;
 use App\Rules\cekConfGuru;
 use App\Rules\cekConfMurid;
 use App\Rules\cekEmail;
 use App\Rules\UsernameAda;
+
+use App\Admin;
+use App\Guru;
+use App\Murid;
+
 use App\Tingkat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -77,6 +83,7 @@ class LoginController extends Controller
 
     public function Login(Request $request)
     {
+
         $data = [
             "Admin_Username" => $request->username,
             "password" => $request->password,
@@ -92,6 +99,24 @@ class LoginController extends Controller
         }else{
             return redirect("/login")->with("pesan","Gagal Login");
         }
+
+        $username = $request->username;
+        $password = $request->password;
+        if(sizeof(Murid::where("Murid_Username", $username)->get()) != 0){
+            $user = Murid::where("Murid_Username", $username)->get();
+            $request->session()->put("muridLogin", $user);
+        }
+        if(sizeof(Guru::where("Guru_Username", $username)->get()) != 0){
+            $user = Guru::where("Guru_Username", $username)->get();
+            $request->session()->put("guruLogin", $user);
+        }
+        if(sizeof(Admin::where("Admin_Username", $username)->get()) != 0){
+            $user = Admin::where("Admin_Username", $username)->get();
+            $request->session()->put("adminLogin", $user);
+        }
+
+        return redirect("/");
+
     }
 
     public function showRegister()
@@ -99,6 +124,7 @@ class LoginController extends Controller
         $data = Tingkat::select('*')->get();
         return view("register", ["tingkat"=>$data]);
     }
+
 
     public function registerPengajar(Request $request)
     {
@@ -159,5 +185,21 @@ class LoginController extends Controller
 
         $data = Tingkat::select('*')->get();
         return view('register',["tingkat"=>$data]);
+
+    public function registerPelajar(Request $request)
+    {
+
+    }
+
+    public function registerPengajar(Request $request)
+    {
+
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget(["muridLogin", "guruLogin", "adminLogin"]);
+        return redirect("/about");
+
     }
 }

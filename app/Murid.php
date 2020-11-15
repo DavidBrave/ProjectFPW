@@ -21,7 +21,13 @@ class Murid extends Authenticatable
         "Murid_Photo"
     ];
 
+
     public function getAuthPassword(){
         return $this->Murid_Password;
+    }
+  
+    public function pengambilan()
+    {
+        return $this->belongsToMany(Les::class, "Pengambilan_Pelajaran", "Pengambilan_Murid", "Pengambilan_Les");
     }
 }

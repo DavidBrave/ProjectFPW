@@ -5,7 +5,7 @@
             display: grid;
             grid-template-rows: 120px 700px 100px;
         }
-        #register-container{
+        #login-container{
             background-color:white;
             width: 400px;
             height: 450px;
@@ -27,7 +27,7 @@
             margin-left: 75px;
         }
     </style>
-    <div id="register-container">
+    <div id="login-container">
         <h2>Login</h2><br>
         <form action="/melakukanlogin" method="post">
             @csrf

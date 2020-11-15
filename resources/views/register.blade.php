@@ -3,12 +3,12 @@
     <style>
         #container{
             display: grid;
-            grid-template-rows: 120px 950px 100px;
+            grid-template-rows: 120px auto 100px;
         }
         #register-container{
             background-color:white;
             width: 500px;
-            height: 950px;
+            height: auto;
             margin-left: auto;
             margin-right: auto;
             margin-top: 50px;
@@ -46,13 +46,31 @@
         #pelajar{
             color: #ff8282;
         }
+        #kotak{
+            height: 100px;
+            width: 100px;
+            margin-bottom: 10px;
+            background-size: 80px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url("Images/nophoto.png");
+            background-color: gray;
+        }
+
+        #kotak2{
+            height: 100px;
+            width: 100px;
+            margin-bottom: 10px;
+            background-size: 80px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url("Images/nophoto.png");
+            background-color: gray;
+        }
     </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css%22%3E">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js%22%3E"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js%22%3E"></script>
     <script>
         $(document).ready(function () {
-            $('select').formSelect();
+            $('select').material_select();
 
             $("#pengajar").click(function () {
                 $("#pengajar").css("color", " #ff8282");
@@ -68,7 +86,25 @@
                 $("#form-pengajar").hide();
             });
 
+            $("#imgfile").change(function () {
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(document.getElementById("imgfile").files[0]);
 
+                oFReader.onload = function (oFREvent) {
+                    $("#kotak").css("background-image", "url('" + oFREvent.target.result + "')");
+                    $("#kotak").css("background-size", "cover");
+                };
+            });
+
+            $("#imgfile2").change(function () {
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(document.getElementById("imgfile2").files[0]);
+
+                oFReader.onload = function (oFREvent) {
+                    $("#kotak2").css("background-image", "url('" + oFREvent.target.result + "')");
+                    $("#kotak2").css("background-size", "cover");
+                };
+            });
         });
     </script>
     <div id="register-container">
@@ -82,6 +118,9 @@
         <div id="form-pelajar">
             <form action="/registerpelajar" method="post">
                 @csrf
+                <div id="kotak"></div>
+                Photo: <br><br>
+                <input type="file" name="imgfile" id="imgfile"><br><br>
                 Username: <input type="text" name="username" placeholder="Type your username"><br>
                 @error('username')
                     <div style="color:red; font-weight:bold"> {{$message}}</div>
@@ -99,13 +138,16 @@
                     <div style="color:red; font-weight:bold"> {{$message}}</div>
                 @enderror
                 Confirm Password: <input type="password" name="confirm" placeholder="Type your password again"><br><br>
+
                 @error('confirm')
                     <div style="color:red; font-weight:bold"> {{$message}}</div>
                 @enderror
+
+                Tingkatan:
+
                 <div class="input-field col s12">
-                    Tingkatan:
                     <select name="tingkat">
-                        <option value="" disabled selected>Choose your option</option>
+                        <option value="none" disabled selected>Choose your option</option>
                         @isset($tingkat)
                             @foreach ($tingkat as $item)
                                 <option value="{{$item->Pendidikan_ID}}">{{$item->Pendidikan_Keterangan}}</option>
@@ -118,7 +160,11 @@
         </div>
         <div id="form-pengajar" hidden>
             <form action="/registerguru" method="post">
+
                 @csrf
+                <div id="kotak2"></div>
+                Photo: <br><br>
+                <input type="file" name="imgfile" id="imgfile2"><br><br>
                 Username: <input type="text" name="username" placeholder="Type your username"><br>
                 Name: <input type="text" name="name" placeholder="Type your name"><br>
                 Email: <input type="text" name="email" placeholder="Type your email"><br>
