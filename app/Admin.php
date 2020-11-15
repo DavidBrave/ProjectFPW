@@ -2,9 +2,10 @@
 
 namespace App;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
     public $table = "Admin";
     public $primaryKey = "Admin_ID";
@@ -14,6 +15,10 @@ class Admin extends Model
         "Admin_ID",
         "Admin_Username",
         "Admin_Nama",
-        "Admin_Password"
+        "admin_password"
     ];
+
+    public function getAuthPassword(){
+        return $this->admin_password;
+    }
 }
