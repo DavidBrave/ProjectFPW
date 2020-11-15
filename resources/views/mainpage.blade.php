@@ -96,6 +96,7 @@
                 $("#about-container").css("color", "white");
                 $("#txtPersonal").css("color", "white");
 
+
                 Materialize.toast('Dark Mode', 2000, 'rounded');
             }
             else {
