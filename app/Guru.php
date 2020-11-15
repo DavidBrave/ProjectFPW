@@ -17,12 +17,16 @@ class Guru extends Model
         "Guru_Nama",
         "Guru_Email",
         "Guru_Alamat",
-        "Lampiran",
         "Diterima"
     ];
 
     public function les()
     {
         return $this->hasMany(Les::class, "Guru_ID");
+    }
+
+    public function sertifikat()
+    {
+        return $this->hasMany(Sertifikat::class, "Guru_ID");
     }
 }
