@@ -46,6 +46,22 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'admin_guard' => [
+            'driver' => 'session',
+            'provider' => 'admin_provider',
+        ],
+
+        'murid_guard' => [
+            'driver' => 'session',
+            'provider' => 'murid_provider',
+        ],
+
+        'guru_guard' => [
+            'driver' => 'session',
+            'provider' => 'guru_provider',
+        ],
+
     ],
 
     /*
@@ -75,6 +91,21 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        "admin_provider" => [
+            "driver" => "eloquent",
+            "model" => App\Admin::class,
+        ],
+
+        "murid_provider" => [
+            "driver" => "eloquent",
+            "model" => App\Murid::class,
+        ],
+
+        "guru_provider" => [
+            "driver" => "eloquent",
+            "model" => App\Guru::class,
+        ],
+
     ],
 
     /*

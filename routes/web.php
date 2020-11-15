@@ -17,9 +17,11 @@ Route::get('/', 'MainController@home');
 Route::get('/about', 'MainController@about');
 Route::get("/login", "LoginController@ShowLogin");
 Route::get("/register", "LoginController@showRegister");
-Route::post("/register_pengajar", "LoginController@registerPengajar");
-Route::post("/register_pelajar", "LoginController@registerPelajar");
-Route::post("/login_user", "LoginController@Login");
+
+Route::post("/melakukanlogin", "LoginController@Login");
+Route::post("/registerpelajar", "LoginController@registerMurid");
+Route::post("/registerguru","LoginController@registerPengajar");
+
 Route::get("/changemode", "MainController@darkmode");
 Route::get("/logout", "LoginController@logout");
 Route::get("/courses", "MainController@courses");

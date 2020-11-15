@@ -25,4 +25,9 @@ class Les extends Model
     {
         return $this->belongsTo(Tingkat::class, "Tingkatan_ID", "Pendidikan_ID");
     }
+
+    public function pengambilan()
+    {
+        return $this->belongsToMany(Murid::class, "Pengambilan_Pelajaran", "Pengambilan_Les", "Pengambilan_Murid");
+    }
 }

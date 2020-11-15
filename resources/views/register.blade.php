@@ -116,17 +116,35 @@
         <hr>
         <br><br>
         <div id="form-pelajar">
-            <form action="/register_pelajar" method="post">
+            <form action="/registerpelajar" method="post">
                 @csrf
                 <div id="kotak"></div>
                 Photo: <br><br>
                 <input type="file" name="imgfile" id="imgfile"><br><br>
                 Username: <input type="text" name="username" placeholder="Type your username"><br>
+                @error('username')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Name: <input type="text" name="name" placeholder="Type your name"><br>
+                @error('name')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Email: <input type="text" name="email" placeholder="Type your email"><br>
+                @error('email')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Password: <input type="password" name="password" placeholder="Type your password"><br>
+                @error('password')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Confirm Password: <input type="password" name="confirm" placeholder="Type your password again"><br><br>
+
+                @error('confirm')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
+
                 Tingkatan:
+
                 <div class="input-field col s12">
                     <select name="tingkat">
                         <option value="none" disabled selected>Choose your option</option>
@@ -141,19 +159,38 @@
             </form>
         </div>
         <div id="form-pengajar" hidden>
-            <form action="register_pengajar" method="post">
+            <form action="/registerguru" method="post">
+
                 @csrf
                 <div id="kotak2"></div>
                 Photo: <br><br>
                 <input type="file" name="imgfile" id="imgfile2"><br><br>
                 Username: <input type="text" name="username" placeholder="Type your username"><br>
+                @error('username')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Name: <input type="text" name="name" placeholder="Type your name"><br>
+                @error('name')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Email: <input type="text" name="email" placeholder="Type your email"><br>
+                @error('email')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Alamat: <input type="text" name="address" placeholder="Type your address"><br>
+                @error('address')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Sertifikat: <br><br>
                 <input type="file" name="myfile" id=""><br><br>
                 Password: <input type="password" name="password" placeholder="Type your password"><br>
+                @error('password')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Confirm Password: <input type="password" name="confirm" placeholder="Type your password again"><br><br>
+                @error('confirm')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 <button class="btn waves-effect blue lighten-1 btnRegister" type="submit" name="action">Register</button>
             </form>
         </div>
