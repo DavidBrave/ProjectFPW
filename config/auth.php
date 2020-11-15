@@ -50,8 +50,18 @@ return [
         'admin_guard' => [
             'driver' => 'session',
             'provider' => 'admin_provider',
-            'hash' => false,
         ],
+
+        'murid_guard' => [
+            'driver' => 'session',
+            'provider' => 'murid_provider',
+        ],
+
+        'guru_guard' => [
+            'driver' => 'session',
+            'provider' => 'guru_provider',
+        ],
+
     ],
 
     /*
@@ -86,6 +96,15 @@ return [
             "model" => App\Admin::class,
         ],
 
+        "murid_provider" => [
+            "driver" => "eloquent",
+            "model" => App\Murid::class,
+        ],
+
+        "guru_provider" => [
+            "driver" => "eloquent",
+            "model" => App\Guru::class,
+        ],
 
     ],
 

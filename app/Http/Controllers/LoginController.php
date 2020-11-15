@@ -11,8 +11,7 @@ use App\Rules\cekEmail;
 use App\Rules\UsernameAda;
 
 use App\Admin;
-use App\Guru;
-use App\Murid;
+
 
 use App\Tingkat;
 use Illuminate\Http\Request;
@@ -43,7 +42,7 @@ class LoginController extends Controller
         $this->validate($request, $rules, $customError);
 
         $user = $request->username;
-        $pass = $request->password;
+        $pass = bcrypt($request->password);
         $email = $request->email;
         $name = $request->name;
         $tingkat = $request->tingkat;
@@ -67,8 +66,7 @@ class LoginController extends Controller
         $newMurid->Murid_Username = $user ;
         $newMurid->Murid_Password = $pass;
         $newMurid->Murid_Nama = $name;
-        // $newMurid->Murid_Tingkat = $tingkat;
-        $newMurid->Murid_Tingkat = "PDK0001";
+        $newMurid->Murid_Tingkat = $tingkat;
         $newMurid->Murid_Email = $email;
         // $newMurid->Murid_Photo = $photo;
         $newMurid->Murid_Photo = "test.jpg";
@@ -84,38 +82,30 @@ class LoginController extends Controller
     public function Login(Request $request)
     {
 
-        $data = [
+        $dataAdmin = [
             "Admin_Username" => $request->username,
             "password" => $request->password,
         ];
 
-        if(Auth::guard('admin_guard')->attempt($data)){
-            dd($data);
-            return view("login");
-        // }else if (Auth::guard('murid_guard')->attempt($data)){
-        //     return view("mainpage");
-        // }else if(Auth::guard('guru_guard')->attempt($data)){
-        //     return view('about');
+        $dataMurid = [
+            "Murid_Username" => $request->username,
+            "password" => $request->password,
+        ];
+
+        $dataGuru = [
+            "Guru_Username" => $request->username,
+            "password" => $request->password,
+        ];
+
+        if(Auth::guard('murid_guard')->attempt($dataMurid)){
+            return view("home");
+        }else if (Auth::guard('admin_guard')->attempt($dataAdmin)){
+            return view("mainpage");
+        }else if(Auth::guard('guru_guard')->attempt($dataGuru)){
+            return view('home');
         }else{
             return redirect("/login")->with("pesan","Gagal Login");
         }
-
-        $username = $request->username;
-        $password = $request->password;
-        if(sizeof(Murid::where("Murid_Username", $username)->get()) != 0){
-            $user = Murid::where("Murid_Username", $username)->get();
-            $request->session()->put("muridLogin", $user);
-        }
-        if(sizeof(Guru::where("Guru_Username", $username)->get()) != 0){
-            $user = Guru::where("Guru_Username", $username)->get();
-            $request->session()->put("guruLogin", $user);
-        }
-        if(sizeof(Admin::where("Admin_Username", $username)->get()) != 0){
-            $user = Admin::where("Admin_Username", $username)->get();
-            $request->session()->put("adminLogin", $user);
-        }
-
-        return redirect("/");
 
     }
 
@@ -134,7 +124,7 @@ class LoginController extends Controller
             'password' =>['required', 'min:8', 'max:24'],
             'confirm' =>['required', new cekConfGuru($request->password)],
             'email' =>['required', new cekEmail],
-            'alamat' => ['required']
+            'address' => ['required']
         ];
 
         $customError = [
@@ -145,15 +135,15 @@ class LoginController extends Controller
 
         $this->validate($request, $rules, $customError);
 
+
         $user = $request->username;
-        $pass = $request->password;
+        $pass = bcrypt($request->password);
         $email = $request->email;
         $name = $request->name;
-        $alamat = $request->alamat;
-        // $lampiran = $request->lampiran;
+        $alamat = $request->address;
         // $photo = $request->photo;
 
-        $allGuru = Murid::select('*')->get();
+        $allGuru = Guru::select('*')->get();
         $dataGuru = $allGuru[count($allGuru)-1];
         $angka = substr($dataGuru->Guru_ID,3,4)+1;
         if($angka>999){
@@ -165,18 +155,15 @@ class LoginController extends Controller
         }else {
             $id = "GRU000".$angka;
         }
-
         $newGuru = new Guru;
         $newGuru->Guru_ID = $id;
         $newGuru->Guru_Username = $user ;
         $newGuru->Guru_Password = $pass;
         $newGuru->Guru_Alamat = $alamat;
         $newGuru->Guru_Nama = $name;
-        $newGuru->Guru_Tingkat = "PDK0001";
         $newGuru->Guru_Email = $email;
         // $newGuru->Guru_Photo = $photo;
         $newGuru->Guru_Photo = "test.jpg";
-        $newGuru->Lampiran = null;
         $newGuru->Diterima = 0;
 
         $newGuru->save();
@@ -185,16 +172,13 @@ class LoginController extends Controller
 
         $data = Tingkat::select('*')->get();
         return view('register',["tingkat"=>$data]);
+    }
 
     public function registerPelajar(Request $request)
     {
 
     }
 
-    public function registerPengajar(Request $request)
-    {
-
-    }
 
     public function logout(Request $request)
     {
