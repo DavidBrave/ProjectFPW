@@ -11,8 +11,12 @@
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <style>
+    body{
+        background-color: #bfe6ff;
+    }
     #container{
         display: grid;
         grid-template-rows: 120px 900px 100px;
@@ -25,6 +29,7 @@
         background-color: white;
         width: 200px;
         border-radius: 10px;
+        margin: 10px;
     }
     .menu-item{
         display: block;
@@ -63,8 +68,13 @@
             interval : 3000
         });
 
+        $('.materialboxed').materialbox();
+
+        $('.carousel.carousel-slider').carousel();
+
         $(".account").click(function () {
             $("#menu").toggle();
+            $("#menu-kelas").hide();
         });
 
         $("#darkmode").change(function () {
@@ -75,6 +85,7 @@
                         dark : "true"
                     }
                 });
+                $("body").css("background-color", "#424242");
                 $("#header").css("background-color", "rgb(43, 40, 40)");
                 $("#container").css("background-color", "#424242");
                 $(".account").css("background-color", "#616161");
@@ -83,6 +94,8 @@
                 $("#home-container").css("background-color", "#9e9e9e");
                 $("#about-container").css("background-color", "#9e9e9e");
                 $("#about-container").css("color", "white");
+                $("#txtPersonal").css("color", "white");
+
 
                 Materialize.toast('Dark Mode', 2000, 'rounded');
             }
@@ -93,29 +106,35 @@
                         dark : "false"
                     }
                 });
+                $("body").css("background-color", "#bfe6ff");
                 $("#header").css("background-color", "#5f9abf");
                 $("#container").css("background-color", "#bfe6ff");
                 $(".account").css("background-color", "#8fc2e2");
                 $("#footer").css("background-color", "#bfe6ff");
-                $("#footer").css("color", "black");
+                $("#footer").css("color", "#1f333f");
                 $("#home-container").css("background-color", "white");
                 $("#about-container").css("background-color", "white");
                 $("#about-container").css("color", "black");
+                $("#txtPersonal").css("color", "black");
 
                 Materialize.toast('Normal Mode', 2000, 'rounded');
             }
         });
 
         $("#kelas").click(function () {
-           $("#menu-kelas").toggle();
+           $("#menu-kelas").show();
         });
     });
 </script>
-<body>
-    @if (session("dark") == "false" || session("dark") == null)
-        <div id="container">
-    @else
+@if (session("dark") == "true")
+    <body style="background-color: #424242;">
+@else
+    <body>
+@endif
+    @if (session("dark") == "true")
         <div id="container" style="background-color: #424242;">
+    @else
+        <div id="container">
     @endif
         @include('includes.header')
         @if (session("muridLogin"))
@@ -128,7 +147,7 @@
         @endif
         @if (session("guruLogin"))
             <div id="menu" hidden>
-                <a href="" class="waves-effect menu-item">Profil saya</a>
+                <a href="/guru_profile" class="waves-effect menu-item">Profil saya</a>
                 <a href="javascript:void(0)" class="waves-effect menu-item" id="kelas">Kelas</a>
                 <div id="menu-kelas" hidden>
                     <a href="" class="waves-effect menu-item-kelas">Kelas saya</a>
@@ -142,6 +161,7 @@
         @if (session("adminLogin"))
             <div id="menu" hidden>
                 {{-- MENU ITEM ADMIN --}}
+                <a href="/logout" class="waves-effect menu-item">Keluar</a>
             </div>
         @endif
         <div class="switch" id="mode">

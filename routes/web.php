@@ -25,3 +25,4 @@ Route::post("/registerguru","LoginController@registerPengajar");
 Route::get("/changemode", "MainController@darkmode");
 Route::get("/logout", "LoginController@logout");
 Route::get("/courses", "MainController@courses");
+Route::get("/guru_profile", "GuruController@profile");

@@ -27,7 +27,13 @@ class Guru extends Authenticatable
         return $this->hasMany(Les::class, "Guru_ID");
     }
 
-    public function getAuthPassword(){
+    public function sertifikat()
+    {
+        return $this->hasMany(Sertifikat::class, "Guru_ID");
+    }
+  
+    public function getAuthPassword()
+    {
         return $this->Guru_Password;
     }
 }
