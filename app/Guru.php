@@ -18,7 +18,6 @@ class Guru extends Authenticatable
         "Guru_Nama",
         "Guru_Email",
         "Guru_Alamat",
-        "Lampiran",
         "Diterima",
         "Guru_Photo"
     ];
@@ -29,6 +28,6 @@ class Guru extends Authenticatable
     }
 
     public function getAuthPassword(){
-        return $this->Admin_Password;
+        return $this->Guru_Password;
     }
 }

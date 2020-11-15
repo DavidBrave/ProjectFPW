@@ -22,9 +22,6 @@ Route::post("/melakukanlogin", "LoginController@Login");
 Route::post("/registerpelajar", "LoginController@registerMurid");
 Route::post("/registerguru","LoginController@registerPengajar");
 
-Route::post("/register_pengajar", "LoginController@registerPengajar");
-Route::post("/register_pelajar", "LoginController@registerPelajar");
-Route::post("/login_user", "LoginController@Login");
 Route::get("/changemode", "MainController@darkmode");
 Route::get("/logout", "LoginController@logout");
 Route::get("/courses", "MainController@courses");
