@@ -10,6 +10,7 @@ class Les extends Model
     public $primaryKey = "Les_ID";
     public $incrementing = false;
     public $timestamps = false;
+    public $guarded = [];
 
     public function guru()
     {
