@@ -77,6 +77,13 @@
     .dropdown-content li>a, .dropdown-content li>span{
         color: black;
     }
+    .input-field input[type=text]:focus + label, .input-field input[type=number]:focus + label, .materialize-textarea:focus:not([readonly]) + label {
+        color: #0d47a1 !important;
+    }
+    .input-field input[type=text]:focus, .input-field input[type=number]:focus, .materialize-textarea:focus:not([readonly]) {
+        border-bottom: 1px solid #0d47a1 !important;
+        box-shadow: 0 1px 0 0 #0d47a1 !important;
+    }
 </style>
 <script>
     $(document).ready(function () {
@@ -169,7 +176,7 @@
                 <a href="javascript:void(0)" class="waves-effect menu-item" id="kelas">Kelas</a>
                 <div id="menu-kelas" hidden>
                     <a href="" class="waves-effect menu-item-kelas">Kelas saya</a>
-                    <a href="" class="waves-effect menu-item-kelas">Buat kelas</a>
+                    <a href="/create_class" class="waves-effect menu-item-kelas">Buat kelas</a>
                     <a href="" class="waves-effect menu-item-kelas">Tutup kelas</a>
                 </div>
                 <a href="" class="waves-effect menu-item">Chat</a>

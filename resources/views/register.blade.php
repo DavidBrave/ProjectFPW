@@ -56,7 +56,6 @@
             background-image: url("Images/nophoto.png");
             background-color: gray;
         }
-
         #kotak2{
             height: 100px;
             width: 100px;
@@ -66,6 +65,9 @@
             background-position: center;
             background-image: url("Images/nophoto.png");
             background-color: gray;
+        }
+        a{
+            color: black;
         }
     </style>
     <script>
@@ -108,8 +110,8 @@
     <div id="register-container">
         <h2>Register</h2>
         <div id="register-navbar">
-            <h5 id="pelajar">Pelajar</h5>
-            <h5 id="pengajar">Pengajar</h5>
+            <a href="javascript:void(0)"><h5 id="pelajar">Pelajar</h5></a>
+            <a href="javascript:void(0)"><h5 id="pengajar">Pengajar</h5></a>
         </div>
         <hr>
         <br><br>

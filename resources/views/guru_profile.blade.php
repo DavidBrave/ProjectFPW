@@ -37,6 +37,9 @@
         img.materialboxed.active{
             margin-top: 70px;
         }
+        .carousel.carousel-slider {
+            margin-top: 20px;
+        }
     </style>
     <div id="guru-profile-container">
         @if (session("dark") == "true")
