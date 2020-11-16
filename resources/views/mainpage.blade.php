@@ -87,6 +87,10 @@
 </style>
 <script>
     $(document).ready(function () {
+        $('.timepicker').timepicker({
+            twelveHour : false
+        });
+
         $('select').formSelect();
 
         $('.slider').slider({
