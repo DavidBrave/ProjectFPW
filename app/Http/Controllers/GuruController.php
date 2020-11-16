@@ -10,6 +10,6 @@ class GuruController extends Controller
     public function profile(Request $request)
     {
         $guru =  $request->session()->get("guruLogin");
-        return view("guru_profile", ["guru" => $guru[0]]);
+        return view("guru_profile", ["guru" => $guru]);
     }
 }
