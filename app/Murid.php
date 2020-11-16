@@ -3,31 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Murid extends Authenticatable
+class Murid extends Model
 {
-    public $table = "Murid";
-    public $primaryKey = "Murid_ID";
+    protected $table = "Murid";
+    protected $primaryKey = "Murid_ID";
     public $incrementing = false;
     public $timestamps = false;
-    public $fillable = [
-        "Murid_ID",
-        "Murid_Username",
-        "Murid_Password",
-        "Murid_Nama",
-        "Murid_Tingkat",
-        "Murid_Email",
-        "Murid_Photo"
-    ];
+    protected $guarded = [];
 
-
-    public function getAuthPassword(){
-        return $this->Murid_Password;
-    }
-  
-    public function pengambilan()
+    public function tingkatan()
     {
-        return $this->belongsToMany(Les::class, "Pengambilan_Pelajaran", "Pengambilan_Murid", "Pengambilan_Les");
+        return $this->belongsTo(Tingkatan::class,"Murid_Tingkat","Pendidikan_ID");
+    }
+    public function les()
+    {
+        return $this->belongsToMany(Les::class,"Pengambilan_Pelajaran","Pengambilan_Murid","Pengambilan_Les")->withPivot("Pengambilan_Status");
     }
 }
