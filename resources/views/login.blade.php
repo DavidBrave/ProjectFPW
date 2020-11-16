@@ -38,7 +38,7 @@
                 <label for="hide_pass"><b id="text_showHide">Show Password</b></label>
             </div><br><br><br>
             @if (session("pesan"))
-                <div style="color:red"> {{session("pesan")}}</div>
+                <div style="color:red"> {{session("pesan")}}</div><br>
             @endif
             <button class="btn waves-effect blue lighten-1 btnLogin" type="submit" name="action">Login</button>
         </form>

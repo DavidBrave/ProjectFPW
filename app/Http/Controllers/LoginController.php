@@ -110,7 +110,7 @@ class LoginController extends Controller
             $request->session()->put('adminLogin', $admin[0]);
             return redirect('/');
         }else{
-            return redirect("/login")->with("pesan","Gagal Login");
+            return redirect("/login")->with("pesan","Username atau password salah");
         }
 
     }
