@@ -31,7 +31,7 @@ class Guru extends Authenticatable
     {
         return $this->hasMany(Sertifikat::class, "Guru_ID");
     }
-  
+
     public function getAuthPassword()
     {
         return $this->Guru_Password;
