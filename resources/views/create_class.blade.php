@@ -22,7 +22,7 @@
             @csrf
             <h2 style="margin: 0px; margin-bottom: 50px;">Buat Kelas</h2>
             <div class="input-field col s6">
-                <input type="text" name="name" style="width: 600px; margin-bottom: 10px;"><br>
+                <input type="text" name="name" style="width: 600px; margin-bottom: 10px;"><br><br>
                 @error('name')
                     <div style="color: red;">{{$message}}</div>
                 @enderror
