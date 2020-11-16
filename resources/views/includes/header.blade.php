@@ -68,13 +68,13 @@
             @else
                 <div class="account" style="background-color: #616161;">
             @endif
-                @if (session("muridLogin")[0]->Murid_Photo)
-                    <img src="{{asset("storage/Photos/".session('muridLogin')[0]->Murid_Photo)}}" alt="" style="width: 40px; height: 40px; float: right; border-radius: 50%;">
+                @if (session("muridLogin")->Murid_Photo)
+                    <img src="{{asset("storage/Photos/".session('muridLogin')->Murid_Photo)}}" alt="" style="width: 40px; height: 40px; float: right; border-radius: 50%;">
                 @else
                     <img src="{{asset("storage/Photos/nophoto.png")}}" alt="" style="width: 40px; height: 40px; float: right;">
                 @endif
                 <i class="material-icons" style="line-height: 40px;">expand_more</i>
-                <p class="txt-name">{{session("muridLogin")[0]->Murid_Nama}}</p>
+                <p class="txt-name">{{session("muridLogin")->Murid_Nama}}</p>
             </div>
         </a>
     @endif
@@ -86,13 +86,13 @@
             @else
                 <div class="account" style="background-color: #616161;">
             @endif
-                @if (session("guruLogin")[0]->Guru_Photo)
-                    <img src="{{asset("storage/Photos/".session('guruLogin')[0]->Guru_Photo)}}" alt="" style="width: 40px; height: 40px; float: right; border-radius: 50%;">
+                @if (session("guruLogin")->Guru_Photo)
+                    <img src="{{asset("storage/Photos/".session('guruLogin')->Guru_Photo)}}" alt="" style="width: 40px; height: 40px; float: right; border-radius: 50%;">
                 @else
                     <img src="{{asset("storage/Photos/nophoto.png")}}" alt="" style="width: 40px; height: 40px; float: right;">
                 @endif
                 <i class="material-icons" style="line-height: 40px;">expand_more</i>
-                <p class="txt-name">{{session("guruLogin")[0]->Guru_Nama}}</p>
+                <p class="txt-name">{{session("guruLogin")->Guru_Nama}}</p>
             </div>
         </a>
     @endif
@@ -106,7 +106,7 @@
             @endif
                 <img src="{{asset("Images/nophoto.png")}}" alt="" style="width: 40px; height: 40px; float: right;">
                 <i class="material-icons" style="line-height: 40px;">expand_more</i>
-                <p class="txt-name">{{session("adminLogin")[0]->Admin_Nama}}</p>
+                <p class="txt-name">{{session("adminLogin")->Admin_Nama}}</p>
             </div>
         </a>
     @endif
