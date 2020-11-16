@@ -10,7 +10,7 @@ class Les extends Model
     protected $primaryKey = "Les_ID";
     public $incrementing = false;
     public $timestamps = false;
-    protected $guarded = [];
+    public $guarded = [];
 
     public function murid()
     {
