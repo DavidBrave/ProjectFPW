@@ -39,6 +39,16 @@
     .menu-item:hover{
         background-color: rgb(223, 221, 221);
     }
+    .menu-item.top:hover{
+        background-color: rgb(223, 221, 221);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .menu-item.bottom:hover{
+        background-color: rgb(223, 221, 221);
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
     #mode{
         position: fixed;
         bottom: 10px;
@@ -60,6 +70,9 @@
     #toast-container {
         top: 90%;
         right: 50%;
+    }
+    span.character-counter{
+        display: none;
     }
 </style>
 <script>
@@ -139,15 +152,15 @@
         @include('includes.header')
         @if (session("muridLogin"))
             <div id="menu" style="height: 200px;" hidden>
-                <a href="" class="waves-effect menu-item">Profil saya</a>
+                <a href="" class="waves-effect menu-item top">Profil saya</a>
                 <a href="" class="waves-effect menu-item">Kelas</a>
                 <a href="" class="waves-effect menu-item">Chat</a>
-                <a href="/logout" class="waves-effect menu-item">Keluar</a>
+                <a href="/logout" class="waves-effect menu-item bottom">Keluar</a>
             </div>
         @endif
         @if (session("guruLogin"))
             <div id="menu" hidden>
-                <a href="/guru_profile" class="waves-effect menu-item">Profil saya</a>
+                <a href="/guru_profile" class="waves-effect menu-item top">Profil saya</a>
                 <a href="javascript:void(0)" class="waves-effect menu-item" id="kelas">Kelas</a>
                 <div id="menu-kelas" hidden>
                     <a href="" class="waves-effect menu-item-kelas">Kelas saya</a>
@@ -155,13 +168,14 @@
                     <a href="" class="waves-effect menu-item-kelas">Tutup kelas</a>
                 </div>
                 <a href="" class="waves-effect menu-item">Chat</a>
-                <a href="/logout" class="waves-effect menu-item">Keluar</a>
+                <a href="/logout" class="waves-effect menu-item bottom">Keluar</a>
             </div>
         @endif
         @if (session("adminLogin"))
             <div id="menu" hidden>
                 {{-- MENU ITEM ADMIN --}}
-                <a href="/logout" class="waves-effect menu-item">Keluar</a>
+                <a href="#" class="waves-effect menu-item top">Profil saya</a>
+                <a href="/logout" class="waves-effect menu-item bottom">Keluar</a>
             </div>
         @endif
         <div class="switch" id="mode">
