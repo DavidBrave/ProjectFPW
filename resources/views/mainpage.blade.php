@@ -74,9 +74,14 @@
     span.character-counter{
         display: none;
     }
+    .dropdown-content li>a, .dropdown-content li>span{
+        color: black;
+    }
 </style>
 <script>
     $(document).ready(function () {
+        $('select').formSelect();
+
         $('.slider').slider({
             interval : 3000
         });

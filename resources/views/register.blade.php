@@ -70,8 +70,6 @@
     </style>
     <script>
         $(document).ready(function () {
-            $('select').material_select();
-
             $("#pengajar").click(function () {
                 $("#pengajar").css("color", " #ff8282");
                 $("#pelajar").css("color", " black");
@@ -144,7 +142,6 @@
                 @enderror
 
                 Tingkatan:
-
                 <div class="input-field col s12">
                     <select name="tingkat">
                         <option value="none" disabled selected>Choose your option</option>
