@@ -21,7 +21,11 @@
             font-weight: bold;
         }
     </style>
-    <div id="about-container">
+    @if (session("dark") == "false" || session("dark") == null)
+        <div id="about-container">
+    @else
+        <div id="about-container" style="background-color: #9e9e9e; color: white;">
+    @endif
         <h3>About Smart Course</h3>
         <ol>
             <li><b>Smart Course</b> Course merupakan kursus online yang baru dibuat pada tahun 2020.</li>

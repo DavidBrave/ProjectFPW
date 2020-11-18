@@ -7,6 +7,10 @@
         line-height: 50px;
     }
 </style>
-<div id="footer">
+@if (session("dark") == "true")
+    <div id="footer"  style="background-color: #424242; color:white;">
+@else
+    <div id="footer">
+@endif
     <p>Copyright © 2020  Smart Course. All rights reserved.  Kursus Bimbel Surabaya</p>
 </div>

@@ -15,4 +15,15 @@ class MainController extends Controller
     {
         return view("about");
     }
+
+    public function darkmode(Request $request)
+    {
+        $dark = $request->input("dark");
+        $request->session()->put("dark", $dark);
+    }
+
+    public function courses()
+    {
+        return view("courses");
+    }
 }
