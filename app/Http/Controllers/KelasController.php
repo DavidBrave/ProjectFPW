@@ -10,13 +10,13 @@ class KelasController extends Controller
 {
     public function indexKelas(Request $request)
     {
-        $idMurid = $request->session()->get("IDLogin");
-        $murid = Murid::find($idMurid)->get();
+        // $idMurid = $request->session()->get("IDLogin");
+        // $murid = Murid::find($idMurid)->get();
 
         $kelas = Les::all();
 
         return view("murid.components.DaftarLes",[
-            "murid"=>$murid[0],
+            // "murid"=>$murid[0],
             "les"=>$kelas
         ]);
     }
@@ -33,9 +33,11 @@ class KelasController extends Controller
             echo "<script>".$request->session()->get("message")."</script>";
         }
         $idLes = $request->session()->get("IDLesDetail");
-        $idMurid = $request->session()->get("IDLogin");
+        // $idMurid = $request->session()->get("IDLogin");
 
-        $kelasDiambil = Murid::find($idMurid)->les()->find($idLes);
+        // $kelasDiambil = Murid::find($idMurid)->les()->find($idLes);
+        $murid = $request->session()->get("muridLogin");
+        $kelasDiambil = $murid->les()->find($idLes);
         $kelas = Les::where('LES_ID',$idLes)->first();
 
         if($kelasDiambil == null){

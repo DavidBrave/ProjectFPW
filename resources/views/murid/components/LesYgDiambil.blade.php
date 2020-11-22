@@ -31,9 +31,10 @@
             </tr>
             <tr>
             <td>
-                @if ($item->Status == 2)
-                <button type="submit" name = "btnDetail" value="{{$les->Les_ID}}">Chat</button>
-            @endif
+                {{-- @if ($item->Status == 2) --}}
+                @if ($les->pivot->Pengambilan_Status == 2)
+                    <button type="submit" name = "btnDetail" value="{{$les->Les_ID}}">Chat</button>
+                @endif
             </td>
             <td>
                 <form action="/set_session_kelas_diambil" method="get">

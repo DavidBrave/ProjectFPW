@@ -1,7 +1,7 @@
 @extends('mainpage')
 @section('content')
     <br><br><br><br>
-    <h1>Welcome , {{$murid->Murid_Username}}</h1>
+    {{-- <h1>Welcome , {{$murid->Murid_Username}}</h1> --}}
     <h2>Daftar Kelas</h2>
     <hr>
         @foreach ($les as $item)
