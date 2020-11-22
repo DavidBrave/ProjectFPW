@@ -7,8 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Murid extends Authenticatable
 {
-    public $table = "Murid";
-    public $primaryKey = "Murid_ID";
+    protected $table = "Murid";
+    protected $primaryKey = "Murid_ID";
     public $incrementing = false;
     public $timestamps = false;
     public $fillable = [
@@ -23,7 +23,7 @@ class Murid extends Authenticatable
 
     public function tingkatan()
     {
-        return $this->belongsTo(Tingkatan::class,"Murid_Tingkat","Pendidikan_ID");
+        return $this->belongsTo(Tingkat::class,"Murid_Tingkat","Pendidikan_ID");
     }
 
     public function les()

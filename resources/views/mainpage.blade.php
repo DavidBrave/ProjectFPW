@@ -165,11 +165,15 @@
     @else
         <div id="container">
     @endif
-        @include('includes.header')
+    @if (!session("muridLogin") && !session("guruLogin"))
+        @include('includes.headerNonUser')
+    @endif
         @if (session("muridLogin"))
+        @include('includes.headerMurid')
+
             <div id="menu" style="height: 200px;" hidden>
-                <a href="" class="waves-effect menu-item top">Profil saya</a>
-                <a href="" class="waves-effect menu-item">Kelas</a>
+                <a href="/murid_profil" class="waves-effect menu-item top">Profil saya</a>
+                <a href="/kelas_yg_diambil" class="waves-effect menu-item">Kelas Saya</a>
                 <a href="" class="waves-effect menu-item">Chat</a>
                 <a href="/logout" class="waves-effect menu-item bottom">Keluar</a>
             </div>
