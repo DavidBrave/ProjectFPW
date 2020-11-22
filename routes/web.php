@@ -29,7 +29,7 @@ Route::get("/guru_profile", "GuruController@profile");
 Route::get("/create_class", "GuruController@createClass");
 Route::post("/tambah_kelas", "GuruController@tambahKelas");
 
-
+//murid
 Route::get('/murid_home', "HomeController@IndexHomeMurid");
 Route::get('/daftar_kelas', "KelasController@indexKelas");
 Route::get('/murid_detail_kelas', "KelasController@indexDetail");
