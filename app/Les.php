@@ -14,8 +14,7 @@ class Les extends Model
 
     public function murid()
     {
-        return $this->belongsToMany(Murid::class,"Pengambilan_Pelajaran","Pengambilan_Les","Pengambilan_Murid")
-        ->withPivot("Pengambilan_Status");
+        return $this->belongsToMany(Murid::class,"Pengambilan_Pelajaran","Pengambilan_Les","Pengambilan_Murid")->withPivot("Pengambilan_Status");
     }
 
     public function guru()

@@ -25,9 +25,16 @@ Route::post("/registerguru","LoginController@registerPengajar");
 Route::get("/changemode", "MainController@darkmode");
 Route::get("/logout", "LoginController@logout");
 Route::get("/courses", "MainController@courses");
-Route::get("/guru_profile", "GuruController@profile");
-Route::get("/create_class", "GuruController@createClass");
-Route::post("/tambah_kelas", "GuruController@tambahKelas");
+
+Route::prefix("guru")->group(function ()
+{
+    Route::get("/profile", "GuruController@profile");
+    Route::get("/create_class", "GuruController@createClass");
+    Route::post("/tambah_kelas", "GuruController@tambahKelas");
+    Route::get("/terima_tolak_murid", "GuruController@showTerimaTolakMurid");
+    Route::get("/terima/{muridId}/{lesId}", "GuruController@terima");
+    Route::get("/tolak/{muridId}/{lesId}", "GuruController@tolak");
+});
 
 //murid
 Route::get('/murid_home', "HomeController@IndexHomeMurid");

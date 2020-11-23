@@ -4,23 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Guru;
 use App\Les;
+use App\Murid;
 use App\Pelajaran;
+use App\Sertifikat;
 use App\Tingkat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GuruController extends Controller
 {
     public function profile(Request $request)
     {
         $guru =  $request->session()->get("guruLogin");
-        return view("guru_profile", ["guru" => $guru]);
+        return view("guru.guru_profile", ["guru" => $guru]);
     }
 
     public function createClass()
     {
         $pelajaran = Pelajaran::all();
         $tingkatan = Tingkat::all();
-        return view("create_class", ["pelajaran" => $pelajaran, "tingkatan" => $tingkatan]);
+        return view("guru.create_class", ["pelajaran" => $pelajaran, "tingkatan" => $tingkatan]);
     }
 
     public function tambahKelas(Request $request)
@@ -70,6 +73,57 @@ class GuruController extends Controller
         ];
         Les::create($les);
 
-        return redirect("/create_class")->with("pesan", "Berhasil menambahkan kelas ".$request->name);
+        return redirect("/guru/create_class")->with("pesan", "Berhasil menambahkan kelas ".$request->name);
+    }
+
+    public function showTerimaTolakMurid(Request $request)
+    {
+        $id = $request->session()->get("guruLogin")->Guru_ID;
+        $murid = Guru::find($id)->les;
+
+        $les = Les::all();
+        $muridTemp = [];
+        foreach ($les as $key) {
+            if($key->Guru_ID == $id){
+                array_push($muridTemp, $murid->find($key->Les_ID)->murid);
+            }
+        }
+
+        $arrMurid = [];
+        for ($i=0; $i < count($muridTemp); $i++) {
+            for ($j=0; $j < count($muridTemp[$i]); $j++) {
+                if($muridTemp[$i][$j] != null && $muridTemp[$i][$j]->pivot->Pengambilan_Status != 2  && $muridTemp[$i][$j]->pivot->Pengambilan_Status != 1){
+                    array_push($arrMurid, $muridTemp[$i][$j]);
+                }
+            }
+        }
+        // dd($arrMurid[0]->pivot->pivotParent);
+        return view('guru.terima_tolak_murid', ["murid" => $arrMurid]);
+    }
+
+    public function terima($muridId, $lesId, Request $request)
+    {
+        $id = $request->session()->get("guruLogin")->Guru_ID;
+        $tes = Guru::find($id)->les()->find($lesId)->murid()->find($muridId);
+        $tes->pivot->Pengambilan_Status = 2;
+        $tes->pivot->save();
+
+        $namaMurid = $tes->Murid_Nama;
+        $namaLes = $tes->pivot->pivotParent->Nama;
+        $request->session()->flash("message", $namaMurid." diterima di ".$namaLes);
+        return redirect("/guru/terima_tolak_murid");
+    }
+
+    public function tolak($muridId, $lesId, Request $request)
+    {
+        $id = $request->session()->get("guruLogin")->Guru_ID;
+        $tes = Guru::find($id)->les()->find($lesId)->murid()->find($muridId);
+        $tes->pivot->Pengambilan_Status = 1;
+        $tes->pivot->save();
+
+        $namaMurid = $tes->Murid_Nama;
+        $namaLes = $tes->pivot->pivotParent->Nama;
+        $request->session()->flash("message", $namaMurid." ditolak dari ".$namaLes);
+        return redirect("/guru/terima_tolak_murid");
     }
 }
