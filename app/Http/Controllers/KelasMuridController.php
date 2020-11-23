@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Les;
 use App\Murid;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class KelasMuridController extends Controller
 {
@@ -77,16 +78,18 @@ class KelasMuridController extends Controller
         $murid = $request->session()->get("muridLogin");
         $les = Les::find($request->session()->get("IDLesDetail"));
 
-        $jum = 1;
-        $murids = Murid::all();
-        foreach ($murids as $item) {
-            $leses = $item->les; //$mhs->poin()->get();
-            if($leses != null){
-                // $jum += count($leses);
-                $jum += count($leses);
-            }
-        }
-        $jum += 1;
+        // $jum = 1;
+        // $murids = Murid::all();
+        // foreach ($murids as $item) {
+        //     $leses = $item->les; //$mhs->poin()->get();
+        //     if($leses != null){
+        //         $jum += count($leses);
+        //     }
+        // }
+
+        $id = DB::table('Pengambilan_Pelajaran')->get()->last()->Pengambilan_ID;
+        $jum = (int)substr($id, 3, 4) + 1;
+
         $idPengambilan = "MLB".str_pad($jum,4,"0",STR_PAD_LEFT);
         $murid->les()->attach($les,[
             "PENGAMBILAN_ID" => $idPengambilan,
@@ -101,7 +104,8 @@ class KelasMuridController extends Controller
     {
         // $murid = Murid::find($request->session()->get("IDLogin"))->first();
         $murid = $request->session()->get("muridLogin");
-        $les = Les::find($request->session()->get("IDLesDetail"))->first();
+        // $les = Les::find($request->session()->get("IDLesDetail"))->first();
+        $les = Les::find($request->session()->get("IDLesDetail"));
         $murid->les()->detach($les);
         $request->session()->flash("message","Permintaan untuk join les berhasil dibatalkan");
         return redirect("/murid_detail_kelas");

@@ -66,13 +66,15 @@ class ProfilController extends Controller
             $email = $murid->Murid_Email;
             // $password = $murid->Murid_Password;
             $password = "";
+            $photo = $murid->Murid_Photo;
         }
 
         return view("murid.components.EditProfil",[
             "username" => $username,
             "nama"=>$nama,
             "email"=>$email,
-            "password"=>$password
+            "password"=>$password,
+            "photo"=>$photo
         ]);
     }
 }
