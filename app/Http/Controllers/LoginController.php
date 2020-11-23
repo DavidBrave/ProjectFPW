@@ -100,6 +100,8 @@ class LoginController extends Controller
         if(Auth::guard('murid_guard')->attempt($dataMurid)){
             $murid = Murid::where("Murid_Username", $request->username)->get();
             $request->session()->put('muridLogin', $murid[0]);
+            //$request->session()->put('IDLogin', $murid[0]->Murid_ID);
+            //return redirect('/murid_home');
             return redirect('/');
         }else if (Auth::guard('guru_guard')->attempt($dataGuru)){
             $guru = Guru::where("Guru_Username", $request->username)->get();
@@ -182,7 +184,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        $request->session()->forget(["muridLogin", "guruLogin", "adminLogin"]);
+        $request->session()->forget(["muridLogin", "guruLogin", "adminLogin","IDLogin"]);
         return redirect("/");
 
     }

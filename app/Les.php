@@ -30,6 +30,6 @@ class Les extends Model
 
     public function tingkatan()
     {
-        return $this->belongsTo(Tingkatan::class,"Tingkatan_ID","Pendidikan_ID");
+        return $this->belongsTo(Tingkat::class,"Tingkatan_ID","Pendidikan_ID");
     }
 }
