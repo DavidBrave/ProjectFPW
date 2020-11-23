@@ -27,7 +27,7 @@
         </script>
     @endif
     <div id="create-class-container">
-        <form action="/tambah_kelas" method="post">
+        <form action="/guru/tambah_kelas" method="post">
             @csrf
             <h2 style="margin: 0px; margin-bottom: 50px;">Buat Kelas</h2>
             <div class="input-field col s6">

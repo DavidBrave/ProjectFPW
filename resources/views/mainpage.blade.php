@@ -192,11 +192,12 @@
         @endif
         @if (session("guruLogin"))
             <div id="menu" hidden>
-                <a href="/guru_profile" class="waves-effect menu-item top">Profil saya</a>
+                <a href="/guru/profile" class="waves-effect menu-item top">Profil saya</a>
                 <a href="javascript:void(0)" class="waves-effect menu-item" id="kelas">Kelas</a>
                 <div id="menu-kelas" hidden>
                     <a href="" class="waves-effect menu-item-kelas">Kelas saya</a>
-                    <a href="/create_class" class="waves-effect menu-item-kelas">Buat kelas</a>
+                    <a href="/guru/create_class" class="waves-effect menu-item-kelas">Buat kelas</a>
+                    <a href="/guru/terima_tolak_murid" class="waves-effect menu-item-kelas">Terima/Tolak Murid</a>
                     <a href="" class="waves-effect menu-item-kelas">Tutup kelas</a>
                 </div>
                 <a href="" class="waves-effect menu-item">Chat</a>

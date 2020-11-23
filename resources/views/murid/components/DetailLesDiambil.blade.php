@@ -61,12 +61,12 @@
             </p>
             @if ($les->pivot->Pengambilan_Status != 2 )
                 <form action="/murid_batal_ajukan_join_les" method="get">
-                    <button class="btn waves-effect red darken-3" type="submit" style="display: block; margin-left: auto; margin-right: auto; margin-top: 40px; width: 120px; font-size: 12px; padding-left: 5px; padding-right: 5px; background-color: #616161;"
+                    <button class="btn waves-effect red darken-3" type="submit" style="display: block; margin-left: auto; margin-right: auto; margin-top: 40px; width: 120px; font-size: 12px; padding-left: 5px; padding-right: 5px;"
                     onclick="return confirm('Apakah anda yakin akan membatalkan permintaan untuk join di les ini?')">Membatalkan permintaan untuk join les<i class="material-icons right" style="margin-left: 5px;">close</i></button>
                 </form>
             @else
                 <form action="/murid_rating_kelas" method="get">
-                    <button class="btn waves-effect red darken-3" type="submit" style="display: block; margin-left: auto; margin-right: auto; margin-top: 40px; width: 120px; font-size: 12px; padding-left: 5px; padding-right: 5px; background-color: #616161;"
+                    <button class="btn waves-effect red darken-3" type="submit" style="display: block; margin-left: auto; margin-right: auto; margin-top: 40px; width: 120px; font-size: 12px; padding-left: 5px; padding-right: 5px;"
                      onclick="return confirm('Apakah anda yakin akan keluar dari les ini?')">Keluar Les<i class="material-icons right" style="margin-left: 5px;">exit_to_app</i></button>
                 </form>
             @endif
