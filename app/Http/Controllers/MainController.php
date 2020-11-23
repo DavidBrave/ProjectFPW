@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Les;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -24,6 +25,13 @@ class MainController extends Controller
 
     public function courses()
     {
-        return view("courses");
+        $kelas = Les::all();
+        return view("courses", ["les" => $kelas]);
+    }
+
+    public function detailCourse(Request $request)
+    {
+        $les = Les::find($request->id);
+        return view("detail", ["les" => $les]);
     }
 }
