@@ -18,7 +18,25 @@
     {{-- <h1>Welcome , {{$murid->Murid_Username}}</h1> --}}
     <div id="daftar-les-container">
         <h2>Daftar Kelas</h2>
+        <form action="/daftar_kelas" method="get">
+            <div class="container" style="display: inline;">
+                <input type="text" style="width: 80%;background-color: white;margin-right: 30px;"
+                 name="edCari" id="" placeholder="Cari berdasarkan nama les,nama guru">
+                <button type="submit" value = "-1" class="btn waves-effect tombol" name="btnCari">Cari</button>
+                <br>
+                Tingkatan :
+                <select name="tingkatan" style="width: 50%;background-color: white;margin-right: 30px" id="">
+                    <option value="none">none</option>
+                    @foreach ($tingkatan as $item)
+                        <option value="{{$item->Pendidikan_ID}}">{{$item->Pendidikan_Keterangan}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+
+        </form>
         <div class="row">
+        @if ($les != null)
         @foreach ($les as $item)
             @if (session("dark") == "true")
                 <div class="col s12 m6 l3 temp-les" style="background-color: #9e9e9e;">
@@ -41,6 +59,9 @@
                 </form>
             </div>
         @endforeach
+        @else
+        <p style="font-size: 16px; margin: 5px;">Tidak ada les yg sesuai dengan pencarian </p>
+        @endif
         </div>
     </div>
 @endsection
