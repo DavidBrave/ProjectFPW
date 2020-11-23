@@ -25,6 +25,7 @@ Route::post("/registerguru","LoginController@registerPengajar");
 Route::get("/changemode", "MainController@darkmode");
 Route::get("/logout", "LoginController@logout");
 Route::get("/courses", "MainController@courses");
+Route::post("/detail_course", "MainController@detailCourse");
 
 Route::prefix("guru")->group(function ()
 {
