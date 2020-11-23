@@ -100,7 +100,7 @@ class LoginController extends Controller
         if(Auth::guard('murid_guard')->attempt($dataMurid)){
             $murid = Murid::where("Murid_Username", $request->username)->get();
             $request->session()->put('muridLogin', $murid[0]);
-            //$request->session()->put('IDLogin', $murid[0]->Murid_ID);
+            $request->session()->put('IDLogin', $murid[0]->Murid_ID);
             //return redirect('/murid_home');
             return redirect('/');
         }else if (Auth::guard('guru_guard')->attempt($dataGuru)){

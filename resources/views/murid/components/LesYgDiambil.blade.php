@@ -32,7 +32,7 @@
                             <p style="font-size: 16px; margin: 5px;">Pengajar : {{$item->guru->Guru_Nama}}</p>
                             <p style="font-size: 16px; margin: 5px;">Tingkat : {{$item->tingkatan->Pendidikan_Keterangan}}</p>
                             <p style="font-size: 16px; margin: 5px;">Status :
-                            @if ($item->pivot->Pengambilan_Status != 2)
+                            @if ($item->pivot->Pengambilan_Status == 2)
                                 Sedang Mengikuti</p>
                             @else
                                 @if ($item->pivot->Pengambilan_Status == 0)

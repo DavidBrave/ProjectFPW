@@ -11,10 +11,9 @@ class KelasMuridController extends Controller
 {
     public function indexMuridKelas(Request $request)
     {
-        // $idMurid = $request->session()->get("IDLogin");
+        $idMurid = $request->session()->get("IDLogin");
 
-        // $kelasDiambil = Murid::find($idMurid)->les;
-        $kelasDiambil = $request->session()->get("muridLogin")->les;
+        $kelasDiambil = Murid::where("Murid_ID",$idMurid)->first()->les;
         return view("murid.components.LesYgDiambil",[
             "leslesan"=>$kelasDiambil
         ]);
@@ -77,7 +76,7 @@ class KelasMuridController extends Controller
         // $murid = Murid::find($request->session()->get("IDLogin"));
         $murid = $request->session()->get("muridLogin");
         $les = Les::find($request->session()->get("IDLesDetail"));
-      
+
         $max = -1;
         $murids = Murid::all();
         foreach ($murids as $item) {
