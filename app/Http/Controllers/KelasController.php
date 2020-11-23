@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Guru;
 use App\Les;
 use App\Murid;
+use App\Tingkat;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
@@ -12,12 +14,26 @@ class KelasController extends Controller
     {
         // $idMurid = $request->session()->get("IDLogin");
         // $murid = Murid::find($idMurid)->get();
+        $kelas = Les::select("*");
+        if($request->btnCari == "-1"){
+            if($request->tingkatan != "none"){
+                $kelas = $kelas->where("Tingkatan_ID",$request->tingkatan);
+            }
+            if($request->edCari != ""){
+                $kelas = $kelas->where("Nama","LIKE","%".$request->edCari."%");
+                $idGurus = Guru::where("Guru_Nama","LIKE","%".$request->edCari."%")->get();
+                foreach ($idGurus as $item) {
+                    $kelas = $kelas->orWhere("Guru_ID",$item->Guru_ID);
+                }
+            }
+        }
 
-        $kelas = Les::all();
+        $tingkatan = Tingkat::all();
 
         return view("murid.components.DaftarLes",[
             // "murid"=>$murid[0],
-            "les"=>$kelas
+            "les"=>$kelas->get(),
+            "tingkatan"=>$tingkatan
         ]);
     }
 
