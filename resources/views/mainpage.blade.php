@@ -26,8 +26,10 @@
     }
     #container{
         display: grid;
-        grid-template-rows: 120px 900px 100px;
+        grid-template-rows: 120px auto 100px;
         background-color: #bfe6ff;
+        min-height: 900px;
+        height: auto;
     }
     #menu{
         position: fixed;
@@ -131,7 +133,8 @@
                 $("#about-container").css("background-color", "#9e9e9e");
                 $("#about-container").css("color", "white");
                 $("#txtPersonal").css("color", "white");
-
+                $(".temp-les").css("background-color", "#9e9e9e");
+                $(".tombol").css("background-color", "#616161");
 
                 Materialize.toast('Dark Mode', 2000, 'rounded');
             }
@@ -152,6 +155,8 @@
                 $("#about-container").css("background-color", "white");
                 $("#about-container").css("color", "black");
                 $("#txtPersonal").css("color", "black");
+                $(".temp-les").css("background-color", "white");
+                $(".tombol").css("background-color", "#42a5f5");
 
                 Materialize.toast('Normal Mode', 2000, 'rounded');
             }
@@ -172,12 +177,12 @@
     @else
         <div id="container">
     @endif
-    @if (!session("muridLogin") && !session("guruLogin"))
+    {{-- @if (!session("muridLogin") && !session("guruLogin"))
         @include('includes.headerNonUser')
-    @endif
+    @endif --}}
+        @include('includes.header')
         @if (session("muridLogin"))
-        @include('includes.headerMurid')
-
+        {{-- @include('includes.headerMurid') --}}
             <div id="menu" style="height: 200px;" hidden>
                 <a href="/murid_profil" class="waves-effect menu-item top">Profil saya</a>
                 <a href="/kelas_yg_diambil" class="waves-effect menu-item">Kelas Saya</a>

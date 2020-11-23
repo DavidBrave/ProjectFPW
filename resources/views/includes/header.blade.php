@@ -111,8 +111,28 @@
         </a>
     @endif
 
-    <ul id="navbar">
+    @if (session("adminLogin") || session("muridLogin") || session("guruLogin"))
+        <ul id="navbar">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about" id="about">About Smart Course</a></li>
+            @if (session("muridLogin"))
+                <li><a href="/daftar_kelas">Course</a></li>
+            @else
+                <li><a href="/courses">Course</a></li>
+            @endif
+        </ul>
+    @else
+        <ul id="navbar">
+            <li><a href="/" id="home">Home</a></li>
+            <li><a href="/about" id="about">About Smart Course</a></li>
+            <li><a href="/courses" id="courses">Courses</a></li>
+            <li><a href="/login" id="login">Login</a></li>
+            <li><a href="/register" id="register">Register</a></li>
+        </ul>
+    @endif
+
+    {{-- <ul id="navbar">
         @yield('menu_bar')
-    </ul>
+    </ul> --}}
 
 </div>
