@@ -72,15 +72,19 @@ class KelasMuridController extends Controller
         $murid = Murid::find($request->session()->get("IDLogin"));
         $les = Les::find($request->session()->get("IDLesDetail"));
 
-        $jum = 1;
+        $max = -1;
         $murids = Murid::all();
         foreach ($murids as $item) {
-            $leses = $item->les; //$mhs->poin()->get();
-            if($leses != null){
-                $jum += count($leses);
+            if($item->les != null){
+                foreach ($item->les as $item2) {
+                    $IDpengajuanLes = (int) substr($item2->pivot->Pengambilan_ID,3);
+                    if($max<$IDpengajuanLes){
+                        $max = $IDpengajuanLes;
+                    }
+                }
             }
         }
-        $idPengambilan = "MLB".str_pad($jum,4,"0",STR_PAD_LEFT);
+        $idPengambilan = "MLB".str_pad(($max+1)."",4,"0",STR_PAD_LEFT);
         $murid->les()->attach($les,[
             "PENGAMBILAN_ID" => $idPengambilan,
             "PENGAMBILAN_STATUS" => 0

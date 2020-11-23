@@ -28,7 +28,7 @@ class Murid extends Authenticatable
 
     public function les()
     {
-        return $this->belongsToMany(Les::class,"Pengambilan_Pelajaran","Pengambilan_Murid","Pengambilan_Les")->withPivot("Pengambilan_Status");
+        return $this->belongsToMany(Les::class,"Pengambilan_Pelajaran","Pengambilan_Murid","Pengambilan_Les")->withPivot("Pengambilan_Status","Pengambilan_ID");
     }
 
     public function getAuthPassword(){
