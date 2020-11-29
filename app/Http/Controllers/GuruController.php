@@ -110,6 +110,8 @@ class GuruController extends Controller
 
         $namaMurid = $tes->Murid_Nama;
         $namaLes = $tes->pivot->pivotParent->Nama;
+        $tes->pivot->pivotParent->Sisa_Slot = $tes->pivot->pivotParent->Sisa_Slot - 1;
+        $tes->pivot->pivotParent->save();
         $request->session()->flash("message", $namaMurid." diterima di ".$namaLes);
         return redirect("/guru/terima_tolak_murid");
     }
@@ -125,5 +127,34 @@ class GuruController extends Controller
         $namaLes = $tes->pivot->pivotParent->Nama;
         $request->session()->flash("message", $namaMurid." ditolak dari ".$namaLes);
         return redirect("/guru/terima_tolak_murid");
+    }
+
+    public function showTutupKelas(Request $request)
+    {
+        $id = $request->session()->get("guruLogin")->Guru_ID;
+        $les = Guru::find($id)->les;
+        return view('guru.tutup_kelas', ["les" => $les]);
+    }
+
+    public function tutup(Request $request)
+    {
+        $lesId = $request->id;
+        $namaLes = Les::find($lesId)->Nama;
+        Les::find($lesId)->delete();
+        $request->session()->flash("message", "Berhasil menutup les $namaLes");
+        return redirect("guru/tutup_kelas");
+    }
+
+    public function showKelasGuru(Request $request)
+    {
+        $id = $request->session()->get("guruLogin")->Guru_ID;
+        $les = Guru::find($id)->les;
+        return view('guru.kelas', ["les" => $les]);
+    }
+
+    public function detailKelas($id, Request $request)
+    {
+        $les = Les::where("Les_ID", $id)->get();
+        return view("guru.detail_kelas", ["les" => $les[0]]);
     }
 }

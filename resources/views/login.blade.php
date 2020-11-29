@@ -27,6 +27,16 @@
             margin-left: 75px;
         }
     </style>
+    @if (session("message"))
+        <style>
+            #toast-container {
+                top: 10%;
+                left: 35%;
+                width: 570px;
+            }
+        </style>
+        <script>Materialize.toast("{{session("message")}}", 2000, 'rounded')</script>
+    @endif
     <div id="login-container">
         <h2>Login</h2><br>
         <form action="/melakukanlogin" method="post">
