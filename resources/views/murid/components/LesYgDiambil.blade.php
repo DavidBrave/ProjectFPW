@@ -32,7 +32,7 @@
                             <p style="font-size: 16px; margin: 5px;">Pengajar : {{$item->guru->Guru_Nama}}</p>
                             <p style="font-size: 16px; margin: 5px;">Tingkat : {{$item->tingkatan->Pendidikan_Keterangan}}</p>
                             <p style="font-size: 16px; margin: 5px;">Status :
-                            @if ($item->pivot->Pengambilan_Status != 2)
+                            @if ($item->pivot->Pengambilan_Status == 2)
                                 Sedang Mengikuti</p>
                             @else
                                 @if ($item->pivot->Pengambilan_Status == 0)
@@ -44,7 +44,11 @@
                         </div>
                         <div style="margin-left: auto; margin-right: auto;">
                             @if ($item->pivot->Pengambilan_Status == 2)
-                                <button class="btn waves-effect tombol" type="submit" name="btnDetail" value="{{$item->Les_ID}}" style="float: left; margin-top: 40px; width: 120px; font-size: 12px; padding-left: 5px; padding-right: 5px; background-color: #616161;">Chat<i class="material-icons right" style="margin-left: 5px;">chat</i></button>
+                                @if (session("dark") == "true")
+                                    <button class="btn waves-effect tombol" type="submit" name="btnDetail" value="{{$item->Les_ID}}" style="float: left; margin-top: 40px; width: 120px; font-size: 12px; padding-left: 5px; padding-right: 5px; background-color: #616161;">Chat<i class="material-icons right" style="margin-left: 5px;">chat</i></button>
+                                @else
+                                    <button class="btn waves-effect tombol" type="submit" name="btnDetail" value="{{$item->Les_ID}}" style="float: left; margin-top: 40px; width: 120px; font-size: 12px; padding-left: 5px; padding-right: 5px; background-color: #42a5f5;">Chat<i class="material-icons right" style="margin-left: 5px;">chat</i></button>
+                                @endif
                             @endif
                             <form action="/set_session_kelas_diambil" method="get" style="display: inline;">
                                 @if (session("dark") == "true")

@@ -7,6 +7,10 @@
     <title>Smart Course</title>
     <link rel="stylesheet" href="{{asset("materialize/css/materialize.css")}}">
     <script src="{{asset("jquery-3.4.1.min.js")}}"></script>
+    <script src="resources\js\jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="{{asset("materialize/css/materialize.css")}}">
+    <link rel="stylesheet" href="{{asset("jquery.js")}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -14,6 +18,9 @@
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <style>
+    .checked {
+        color: orange;
+    }
     body{
         background-color: #bfe6ff;
     }

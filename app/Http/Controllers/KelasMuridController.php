@@ -11,10 +11,9 @@ class KelasMuridController extends Controller
 {
     public function indexMuridKelas(Request $request)
     {
-        // $idMurid = $request->session()->get("IDLogin");
+        $idMurid = $request->session()->get("IDLogin");
 
-        // $kelasDiambil = Murid::find($idMurid)->les;
-        $kelasDiambil = $request->session()->get("muridLogin")->les;
+        $kelasDiambil = Murid::where("Murid_ID",$idMurid)->first()->les;
         return view("murid.components.LesYgDiambil",[
             "leslesan"=>$kelasDiambil
         ]);
@@ -78,19 +77,20 @@ class KelasMuridController extends Controller
         $murid = $request->session()->get("muridLogin");
         $les = Les::find($request->session()->get("IDLesDetail"));
 
-        // $jum = 1;
-        // $murids = Murid::all();
-        // foreach ($murids as $item) {
-        //     $leses = $item->les; //$mhs->poin()->get();
-        //     if($leses != null){
-        //         $jum += count($leses);
-        //     }
-        // }
+        $max = -1;
+        $murids = Murid::all();
+        foreach ($murids as $item) {
+            if($item->les != null){
+                foreach ($item->les as $item2) {
+                    $IDpengajuanLes = (int) substr($item2->pivot->Pengambilan_ID,3);
+                    if($max<$IDpengajuanLes){
+                        $max = $IDpengajuanLes;
+                    }
+                }
+            }
+        }
+        $idPengambilan = "MLB".str_pad(($max+1)."",4,"0",STR_PAD_LEFT);
 
-        $id = DB::table('Pengambilan_Pelajaran')->get()->last()->Pengambilan_ID;
-        $jum = (int)substr($id, 3, 4) + 1;
-
-        $idPengambilan = "MLB".str_pad($jum,4,"0",STR_PAD_LEFT);
         $murid->les()->attach($les,[
             "PENGAMBILAN_ID" => $idPengambilan,
             "PENGAMBILAN_STATUS" => 0
