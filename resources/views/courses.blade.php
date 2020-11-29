@@ -11,13 +11,31 @@
             padding: 10px;
         }
         #daftar-les-container{
-            padding: 50px;
+            padding: 30px 50px 50px 50px;
         }
     </style>
     {{-- <br><br><br><br> --}}
     {{-- <h1>Welcome , {{$murid->Murid_Username}}</h1> --}}
     <div id="daftar-les-container">
-        <h2>Daftar Kelas</h2>
+        <h2>Daftar Kelas</h2><br><br>
+        <form action="/courses" method="get">
+            <div style="width: 30%;">
+                <input type="text" style="background-color: white; margin-right: 30px; height: 30px; padding-left: 5px; border-radius: 5px;" name="name" id="" placeholder="Cari berdasarkan nama les,nama guru">
+                <br>
+                <select name="tingkatan" style="width: 50%;background-color: white;margin-right: 30px" id="">
+                    <option value="none" selected disabled>Pilih Tingkatan</option>
+                    @foreach ($tingkatan as $item)
+                        <option value="{{$item->Pendidikan_ID}}">{{$item->Pendidikan_Keterangan}}</option>
+                    @endforeach
+                </select>
+                <br>
+                @if (session("dark") == "true")
+                    <button type="submit" value = "-1" class="btn waves-effect tombol" name="btnCari" style="background-color: #616161;">Cari</button>
+                @else
+                    <button type="submit" value = "-1" class="btn waves-effect tombol" name="btnCari" style="background-color: #42a5f5;">Cari</button>
+                @endif
+            </div>
+        </form>
         <div class="row">
         @foreach ($les as $item)
             @if (session("dark") == "true")

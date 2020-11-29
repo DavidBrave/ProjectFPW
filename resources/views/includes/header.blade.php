@@ -8,9 +8,11 @@
     }
     #logo{
         float: left;
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
+        margin-left: 20px;
         margin-right: 10px;
+        margin-top: 10px;
     }
     #course_name{
         float: left;
@@ -60,7 +62,7 @@
     <div id="header" style="background-color: rgb(43, 40, 40)">
 @endif
     <img src="{{asset("Images/logo.png")}}" alt="" id="logo">
-    <p id="course_name">Smart Course</p>
+    <img src="{{asset("Images/name.png")}}" alt="" style="margin-top: 17px;">
     @if (session("muridLogin"))
         <a href="javascript:void(0)">
             @if (session("dark") == "false" || session("dark") == null)

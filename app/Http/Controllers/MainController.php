@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Guru;
 use App\Les;
+use App\Tingkat;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -23,10 +25,36 @@ class MainController extends Controller
         $request->session()->put("dark", $dark);
     }
 
-    public function courses()
+    public function courses(Request $request)
     {
-        $kelas = Les::all();
-        return view("courses", ["les" => $kelas]);
+        $kelas = Les::select("*");
+        if($request->btnCari == "-1"){
+            if($request->tingkatan != ""){
+                $kelas = $kelas->where("Tingkatan_ID",$request->tingkatan);
+                if($request->name != ""){
+                    $kelas = $kelas->where("Nama","like","%".$request->name."%");
+                    $idGurus = Guru::where("Guru_Nama","LIKE","%".$request->name."%")->get();
+                    if(sizeof($idGurus) > 0){
+                        foreach ($idGurus as $item) {
+                            $kelas = $kelas->orWhere("Guru_ID",$item->Guru_ID);
+                        }
+                    }
+                }
+            }else{
+                if($request->name != ""){
+                    $kelas = Les::where("Nama","like","%".$request->name."%");
+                    $idGurus = Guru::where("Guru_Nama","LIKE","%".$request->name."%")->get();
+                    if(sizeof($idGurus) > 0){
+                        foreach ($idGurus as $item) {
+                            $kelas = $kelas->orWhere("Guru_ID",$item->Guru_ID);
+                        }
+                    }
+                }
+            }
+        }
+
+        $tingkatan = Tingkat::all();
+        return view("courses", ["les" => $kelas->get(), "tingkatan" => $tingkatan]);
     }
 
     public function detailCourse(Request $request)

@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Smart Course</title>
-    <link rel="stylesheet" href="{{asset("materialize/css/materialize.css")}}">
     <script src="{{asset("jquery-3.4.1.min.js")}}"></script>
-    <script src="resources\js\jquery-3.4.1.js"></script>
     <link rel="stylesheet" href="{{asset("materialize/css/materialize.css")}}">
-    <link rel="stylesheet" href="{{asset("jquery.js")}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
@@ -28,7 +25,7 @@
         display: grid;
         grid-template-rows: 120px auto 100px;
         background-color: #bfe6ff;
-        min-height: 900px;
+        min-height: 937px;
         height: auto;
     }
     #menu{
@@ -96,6 +93,10 @@
 </style>
 <script>
     $(document).ready(function () {
+        $('.fixed-action-btn').floatingActionButton({
+            direction : 'left'
+        });
+
         $('.timepicker').timepicker({
             twelveHour : false
         });
@@ -195,10 +196,10 @@
                 <a href="/guru/profile" class="waves-effect menu-item top">Profil saya</a>
                 <a href="javascript:void(0)" class="waves-effect menu-item" id="kelas">Kelas</a>
                 <div id="menu-kelas" hidden>
-                    <a href="" class="waves-effect menu-item-kelas">Kelas saya</a>
+                    <a href="/guru/kelas" class="waves-effect menu-item-kelas">Kelas saya</a>
                     <a href="/guru/create_class" class="waves-effect menu-item-kelas">Buat kelas</a>
                     <a href="/guru/terima_tolak_murid" class="waves-effect menu-item-kelas">Terima/Tolak Murid</a>
-                    <a href="" class="waves-effect menu-item-kelas">Tutup kelas</a>
+                    <a href="/guru/tutup_kelas" class="waves-effect menu-item-kelas">Tutup kelas</a>
                 </div>
                 <a href="" class="waves-effect menu-item">Chat</a>
                 <a href="/logout" class="waves-effect menu-item bottom">Keluar</a>

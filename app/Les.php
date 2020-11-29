@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Les extends Model
 {
+    use SoftDeletes;
     protected $table = "Les";
     protected $primaryKey = "Les_ID";
     public $incrementing = false;

@@ -29,12 +29,18 @@ Route::post("/detail_course", "MainController@detailCourse");
 
 Route::prefix("guru")->group(function ()
 {
-    Route::get("/profile", "GuruController@profile");
-    Route::get("/create_class", "GuruController@createClass");
-    Route::post("/tambah_kelas", "GuruController@tambahKelas");
-    Route::get("/terima_tolak_murid", "GuruController@showTerimaTolakMurid");
-    Route::get("/terima/{muridId}/{lesId}", "GuruController@terima");
-    Route::get("/tolak/{muridId}/{lesId}", "GuruController@tolak");
+    Route::group(['middleware' => 'cek_guru'], function () {
+        Route::get("/profile", "GuruController@profile");
+        Route::get("/create_class", "GuruController@createClass");
+        Route::post("/tambah_kelas", "GuruController@tambahKelas");
+        Route::get("/terima_tolak_murid", "GuruController@showTerimaTolakMurid");
+        Route::get("/terima/{muridId}/{lesId}", "GuruController@terima");
+        Route::get("/tolak/{muridId}/{lesId}", "GuruController@tolak");
+        Route::get("/tutup_kelas", "GuruController@showTutupKelas");
+        Route::post("/tutup", "GuruController@tutup");
+        Route::get("/kelas", "GuruController@showKelasGuru");
+        Route::get("/detail/{id}", "GuruController@detailKelas");
+    });
 });
 
 //murid
