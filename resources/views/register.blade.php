@@ -116,7 +116,7 @@
         <hr>
         <br><br>
         <div id="form-pelajar">
-            <form action="/registerpelajar" method="post">
+            <form action="/registerpelajar" method="post" enctype="multipart/form-data">
                 @csrf
                 <div id="kotak"></div>
                 Photo: <br><br>
