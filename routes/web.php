@@ -43,6 +43,7 @@ Route::prefix("guru")->group(function ()
         Route::get("/kirim_tugas/{id}", "GuruController@showKirimTugas");
         Route::post("/kirim", "GuruController@kirim");
         Route::get("/edit_profile", "GuruController@showEdit");
+        Route::post("/edit", "GuruController@edit");
     });
 });
 

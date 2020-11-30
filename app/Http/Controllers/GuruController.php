@@ -6,6 +6,9 @@ use App\Guru;
 use App\Les;
 use App\Murid;
 use App\Pelajaran;
+use App\Rules\cekEmail;
+use App\Rules\cekUsername;
+use App\Rules\UsernameAda;
 use App\Sertifikat;
 use App\Tingkat;
 use Illuminate\Http\Request;
@@ -168,6 +171,82 @@ class GuruController extends Controller
     {
         $guru = $request->session()->get("guruLogin");
         return view("guru.edit_profile", ["guru" => $guru]);
+    }
+
+    public function edit(Request $request)
+    {
+        $dosenUsername = $request->session()->get("guruLogin")->Guru_Username;
+
+        if($request->hasFile('imgfile')){
+            $rules = [
+                'name' => ['required'],
+                'username' => ['required', new cekUsername($dosenUsername)],
+                'email' => ['required', 'regex:/^.+@.+$/i', 'regex:/^.*(?=.*[.]).*$/'],
+                'confirm' => ['same:password'],
+                'imgfile' => ['image', 'max:3072'],
+                'alamat' => ['required']
+            ];
+
+            $customError = [
+                'name.required' => 'Nama harus diisi',
+                'username.required' => 'Username harus diisi',
+                'email.required' => 'Email harus diisi',
+                'email.regex' => 'Format email salah',
+                'confirm.same' => 'Konfirmasi password salah',
+                'imgfile.image' => 'Format harus gambar',
+                'imgfile.max' => 'Maksimal 3MB',
+                'alamat.required' => 'Alamat harus diisi'
+            ];
+        }else{
+            $rules = [
+                'name' => ['required'],
+                'username' => ['required', new cekUsername($dosenUsername)],
+                'email' => ['required', 'regex:/^.+@.+$/i', 'regex:/^.*(?=.*[.]).*$/'],
+                'confirm' => ['same:password'],
+                'alamat' => ['required'],
+            ];
+
+            $customError = [
+                'name.required' => 'Nama harus diisi',
+                'username.required' => 'Username harus diisi',
+                'email.required' => 'Email harus diisi',
+                'email.regex' => 'Format email salah',
+                'confirm.same' => 'Konfirmasi password salah',
+                'alamat.required' => 'Alamat harus diisi'
+            ];
+        }
+        $this->validate($request, $rules, $customError);
+
+        $name = $request->name;
+        $username = $request->username;
+        $password = $request->password;
+        $confirm = $request->confirm;
+        $email = $request->email;
+        $imgfile = $request->file('imgfile');
+        $alamat = $request->alamat;
+
+        $guruId = $request->session()->get("guruLogin")->Guru_ID;
+        $guru = Guru::find($guruId);
+        $guru->Guru_Username = $username;
+        $guru->Guru_Nama = $name;
+        $guru->Guru_Email = $email;
+        $guru->Guru_Alamat = $alamat;
+
+        if($password != null){
+            $guru->Guru_Password = bcrypt($password);
+        }
+
+        if($request->hasFile('imgfile')){
+            $filename = pathinfo($imgfile->getClientOriginalName(), PATHINFO_FILENAME)."_".time().".".$imgfile->getClientOriginalExtension();
+            $imgfile->storeAs("public/Photos", $filename);
+            $guru->Guru_Photo = $filename;
+        }
+
+        $guru->save();
+        $guru = Guru::find($guruId);
+        $request->session()->put('guruLogin', $guru);
+
+        return redirect("/guru/edit_profile");
     }
 
     public function kirim(Request $request)

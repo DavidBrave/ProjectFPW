@@ -40,7 +40,7 @@
                         @if ($les->Jum_Orang_Rating == 0)
                             Belum dirating
                         @else
-                            <img src="{{asset("Images/star.png")}}" alt="" style="width: 15px; height: 15px;">{{$les->Rating}}&nbsp&nbsp({{$les->Jum_Orang_Rating}})
+                            <img src="{{asset("Images/star.png")}}" alt="" style="width: 15px; height: 15px;">&nbsp{{$les->Rating}}&nbsp&nbsp({{$les->Jum_Orang_Rating}})
                         @endif
                     </td>
                 </tr>
@@ -60,7 +60,7 @@
                 @else
                     <a class="btn-floating btn-large tombol" style="background-color: #42a5f5;">
                 @endif
-                    <i class="large material-icons">mode_edit</i>
+                    <i class="large material-icons">add</i>
                 </a>
                 <ul>
                     <li><form action="/guru/kirim_chat/{{$les->Les_ID}}" method="get"><button class="btn-floating purple lighten-2" type="submit"><i class="material-icons">chat</i></button></form></li>

@@ -185,7 +185,7 @@
         @if (session("muridLogin"))
         {{-- @include('includes.headerMurid') --}}
             <div id="menu" style="height: 200px;" hidden>
-                <a href="/murid_profil" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">account_box</i><p style="margin: 0px 0px 0px 35px; width: auto;">Profil saya</p></a>
+                <a href="/murid_profil" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">account_box</i><p style="margin: 0px 0px 0px 35px; width: auto;">Profile saya</p></a>
                 <a href="/kelas_yg_diambil" class="waves-effect menu-item"><i class="material-icons" style="position: absolute; font-size: 30px;">school</i><p style="margin: 0px 0px 0px 35px; width: auto;">Kelas Saya</p></a>
                 <a href="" class="waves-effect menu-item"><i class="material-icons" style="position: absolute; font-size: 30px;">chat</i><p style="margin: 0px 0px 0px 35px; width: auto;">Chat</p></a>
                 <a href="/logout" class="waves-effect menu-item bottom"><i class="material-icons" style="position: absolute; font-size: 30px;">exit_to_app</i><p style="margin: 0px 0px 0px 35px; width: auto;">Keluar</p></a>
@@ -193,8 +193,8 @@
         @endif
         @if (session("guruLogin"))
             <div id="menu" hidden>
-                <a href="/guru/profile" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">account_box</i><p style="margin: 0px 0px 0px 35px; width: auto;">Profil saya</p></a>
-                <a href="/guru/edit_profile" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">edit</i><p style="margin: 0px 0px 0px 35px; width: auto;">Edit profil</p></a>
+                <a href="/guru/profile" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">account_box</i><p style="margin: 0px 0px 0px 35px; width: auto;">Profile saya</p></a>
+                <a href="/guru/edit_profile" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">edit</i><p style="margin: 0px 0px 0px 35px; width: auto;">Edit profile</p></a>
                 <a href="javascript:void(0)" class="waves-effect menu-item" id="kelas"><i class="material-icons" style="position: absolute; font-size: 30px;">school</i><p style="margin: 0px 0px 0px 35px; width: auto;">Kelas</p></a>
                 <div id="menu-kelas" hidden>
                     <a href="/guru/kelas" class="waves-effect menu-item-kelas">Kelas saya</a>
@@ -209,7 +209,7 @@
         @if (session("adminLogin"))
             <div id="menu" hidden>
                 {{-- MENU ITEM ADMIN --}}
-                <a href="#" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">account_box</i><p style="margin: 0px 0px 0px 35px; width: auto;">Profil saya</p></a>
+                <a href="#" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">account_box</i><p style="margin: 0px 0px 0px 35px; width: auto;">Profile saya</p></a>
                 <a href="/logout" class="waves-effect menu-item bottom"><i class="material-icons" style="position: absolute; font-size: 30px;">exit_to_app</i><p style="margin: 0px 0px 0px 35px; width: auto;">Keluar</p></a>
             </div>
         @endif
