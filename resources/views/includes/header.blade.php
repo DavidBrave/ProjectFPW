@@ -8,9 +8,11 @@
     }
     #logo{
         float: left;
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
+        margin-left: 20px;
         margin-right: 10px;
+        margin-top: 10px;
     }
     #course_name{
         float: left;
@@ -60,7 +62,7 @@
     <div id="header" style="background-color: rgb(43, 40, 40)">
 @endif
     <img src="{{asset("Images/logo.png")}}" alt="" id="logo">
-    <p id="course_name">Smart Course</p>
+    <img src="{{asset("Images/name.png")}}" alt="" style="margin-top: 17px;">
     @if (session("muridLogin"))
         <a href="javascript:void(0)">
             @if (session("dark") == "false" || session("dark") == null)
@@ -68,13 +70,13 @@
             @else
                 <div class="account" style="background-color: #616161;">
             @endif
-                @if (session("muridLogin")[0]->Murid_Photo)
-                    <img src="{{asset("storage/Photos/".session('muridLogin')[0]->Murid_Photo)}}" alt="" style="width: 40px; height: 40px; float: right; border-radius: 50%;">
+                @if (session("muridLogin")->Murid_Photo)
+                    <img src="{{asset("storage/Photos/".session('muridLogin')->Murid_Photo)}}" alt="" style="width: 40px; height: 40px; float: right; border-radius: 50%;">
                 @else
                     <img src="{{asset("storage/Photos/nophoto.png")}}" alt="" style="width: 40px; height: 40px; float: right;">
                 @endif
                 <i class="material-icons" style="line-height: 40px;">expand_more</i>
-                <p class="txt-name">{{session("muridLogin")[0]->Murid_Nama}}</p>
+                <p class="txt-name">{{session("muridLogin")->Murid_Nama}}</p>
             </div>
         </a>
     @endif
@@ -86,13 +88,13 @@
             @else
                 <div class="account" style="background-color: #616161;">
             @endif
-                @if (session("guruLogin")[0]->Guru_Photo)
-                    <img src="{{asset("storage/Photos/".session('guruLogin')[0]->Guru_Photo)}}" alt="" style="width: 40px; height: 40px; float: right; border-radius: 50%;">
+                @if (session("guruLogin")->Guru_Photo)
+                    <img src="{{asset("storage/Photos/".session('guruLogin')->Guru_Photo)}}" alt="" style="width: 40px; height: 40px; float: right; border-radius: 50%;">
                 @else
                     <img src="{{asset("storage/Photos/nophoto.png")}}" alt="" style="width: 40px; height: 40px; float: right;">
                 @endif
                 <i class="material-icons" style="line-height: 40px;">expand_more</i>
-                <p class="txt-name">{{session("guruLogin")[0]->Guru_Nama}}</p>
+                <p class="txt-name">{{session("guruLogin")->Guru_Nama}}</p>
             </div>
         </a>
     @endif
@@ -106,21 +108,33 @@
             @endif
                 <img src="{{asset("Images/nophoto.png")}}" alt="" style="width: 40px; height: 40px; float: right;">
                 <i class="material-icons" style="line-height: 40px;">expand_more</i>
-                <p class="txt-name">{{session("adminLogin")[0]->Admin_Nama}}</p>
+                <p class="txt-name">{{session("adminLogin")->Admin_Nama}}</p>
             </div>
         </a>
     @endif
 
-    <ul id="navbar">
-        <li><a href="/" id="home">Home</a></li>
-        <li><a href="/about" id="about">About Smart Course</a></li>
-        <li><a href="/courses" id="courses">Courses</a></li>
-        @if (session("muridLogin") || session("guruLogin") || session("adminLogin"))
-
-        @else
+    @if (session("adminLogin") || session("muridLogin") || session("guruLogin"))
+        <ul id="navbar">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about" id="about">About Smart Course</a></li>
+            @if (session("muridLogin"))
+                <li><a href="/daftar_kelas">Course</a></li>
+            @else
+                <li><a href="/courses">Course</a></li>
+            @endif
+        </ul>
+    @else
+        <ul id="navbar">
+            <li><a href="/" id="home">Home</a></li>
+            <li><a href="/about" id="about">About Smart Course</a></li>
+            <li><a href="/courses" id="courses">Courses</a></li>
             <li><a href="/login" id="login">Login</a></li>
             <li><a href="/register" id="register">Register</a></li>
-        @endif
-    </ul>
+        </ul>
+    @endif
+
+    {{-- <ul id="navbar">
+        @yield('menu_bar')
+    </ul> --}}
 
 </div>

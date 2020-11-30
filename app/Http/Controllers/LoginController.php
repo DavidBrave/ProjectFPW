@@ -98,13 +98,21 @@ class LoginController extends Controller
         ];
 
         if(Auth::guard('murid_guard')->attempt($dataMurid)){
-            return view("home");
-        }else if (Auth::guard('admin_guard')->attempt($dataAdmin)){
-            return view("mainpage");
-        }else if(Auth::guard('guru_guard')->attempt($dataGuru)){
-            return view('home');
+            $murid = Murid::where("Murid_Username", $request->username)->get();
+            $request->session()->put('muridLogin', $murid[0]);
+            $request->session()->put('IDLogin', $murid[0]->Murid_ID);
+            //return redirect('/murid_home');
+            return redirect('/');
+        }else if (Auth::guard('guru_guard')->attempt($dataGuru)){
+            $guru = Guru::where("Guru_Username", $request->username)->get();
+            $request->session()->put('guruLogin', $guru[0]);
+            return redirect('/');
+        }else if(Auth::guard('admin_guard')->attempt($dataAdmin)){
+            $admin = Admin::where("Admin_Username", $request->username)->get();
+            $request->session()->put('adminLogin', $admin[0]);
+            return redirect('/');
         }else{
-            return redirect("/login")->with("pesan","Gagal Login");
+            return redirect("/login")->with("pesan","Username atau password salah");
         }
 
     }
@@ -174,16 +182,10 @@ class LoginController extends Controller
         return view('register',["tingkat"=>$data]);
     }
 
-    public function registerPelajar(Request $request)
-    {
-
-    }
-
-
     public function logout(Request $request)
     {
-        $request->session()->forget(["muridLogin", "guruLogin", "adminLogin"]);
-        return redirect("/about");
+        $request->session()->forget(["muridLogin", "guruLogin", "adminLogin","IDLogin"]);
+        return redirect("/");
 
     }
 }

@@ -56,7 +56,6 @@
             background-image: url("Images/nophoto.png");
             background-color: gray;
         }
-
         #kotak2{
             height: 100px;
             width: 100px;
@@ -67,11 +66,12 @@
             background-image: url("Images/nophoto.png");
             background-color: gray;
         }
+        a{
+            color: black;
+        }
     </style>
     <script>
         $(document).ready(function () {
-            $('select').material_select();
-
             $("#pengajar").click(function () {
                 $("#pengajar").css("color", " #ff8282");
                 $("#pelajar").css("color", " black");
@@ -110,8 +110,8 @@
     <div id="register-container">
         <h2>Register</h2>
         <div id="register-navbar">
-            <h5 id="pelajar">Pelajar</h5>
-            <h5 id="pengajar">Pengajar</h5>
+            <a href="javascript:void(0)"><h5 id="pelajar">Pelajar</h5></a>
+            <a href="javascript:void(0)"><h5 id="pengajar">Pengajar</h5></a>
         </div>
         <hr>
         <br><br>
@@ -144,7 +144,6 @@
                 @enderror
 
                 Tingkatan:
-
                 <div class="input-field col s12">
                     <select name="tingkat">
                         <option value="none" disabled selected>Choose your option</option>

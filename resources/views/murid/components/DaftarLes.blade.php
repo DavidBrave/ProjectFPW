@@ -18,9 +18,9 @@
     {{-- <h1>Welcome , {{$murid->Murid_Username}}</h1> --}}
     <div id="daftar-les-container">
         <h2>Daftar Kelas</h2><br><br>
-        <form action="/courses" method="get">
+        <form action="/daftar_kelas" method="get">
             <div style="width: 30%;">
-                <input type="text" style="background-color: white; margin-right: 30px; height: 30px; padding-left: 5px; border-radius: 5px;" name="name" id="" placeholder="Cari berdasarkan nama les,nama guru">
+                <input type="text" style="background-color: white; margin-right: 30px; height: 30px; padding-left: 5px;" name="edCari" id="" placeholder="Cari berdasarkan nama les,nama guru">
                 <br>
                 <select name="tingkatan" style="width: 50%;background-color: white;margin-right: 30px" id="">
                     <option value="none" selected disabled>Pilih Tingkatan</option>
@@ -37,6 +37,7 @@
             </div>
         </form>
         <div class="row">
+        @if ($les != null)
         @foreach ($les as $item)
             @if (session("dark") == "true")
                 <div class="col s12 m6 l3 temp-les" style="background-color: #9e9e9e;">
@@ -50,18 +51,18 @@
                     <p style="font-size: 16px; margin: 5px;">Tingkat : {{$item->tingkatan->Pendidikan_Keterangan}}</p>
                     <p style="font-size: 16px; margin: 5px;">Sisa slot : {{$item->Sisa_Slot}} dari {{$item->Slot}}</p>
                 </div>
-                <form action="/detail_course" method="post">
-                    @csrf
-                    <input type="hidden" name="id" value="{{$item->Les_ID}}">
+                <form action="/set_session_kelas" method="get">
                     @if (session("dark") == "true")
-                        <button class="btn waves-effect tombol" type="submit" style="display: block; margin-left: auto; margin-right: auto; margin-top: 40px; width: 120px; font-size: 12px; padding-left: 5px; padding-right: 5px; background-color: #616161;">Lihat Detail<i class="material-icons right" style="margin-left: 5px;">save</i></button>
+                        <button class="btn waves-effect tombol" type="submit" name="btnDetail" value="{{$item->Les_ID}}" style="display: block; margin-left: auto; margin-right: auto; margin-top: 40px; width: 120px; font-size: 12px; padding-left: 5px; padding-right: 5px; background-color: #616161;">Lihat Detail<i class="material-icons right" style="margin-left: 5px;">save</i></button>
                     @else
-                        <button class="btn waves-effect tombol" type="submit" style="display: block; margin-left: auto; margin-right: auto; margin-top: 40px; width: 120px; font-size: 12px; padding-left: 5px; padding-right: 5px; background-color: #42a5f5;">Lihat Detail<i class="material-icons right" style="margin-left: 5px;">save</i></button>
+                        <button class="btn waves-effect tombol" type="submit" name="btnDetail" value="{{$item->Les_ID}}" style="display: block; margin-left: auto; margin-right: auto; margin-top: 40px; width: 120px; font-size: 12px; padding-left: 5px; padding-right: 5px; background-color: #42a5f5;">Lihat Detail<i class="material-icons right" style="margin-left: 5px;">save</i></button>
                     @endif
                 </form>
             </div>
         @endforeach
+        @else
+        <p style="font-size: 16px; margin: 5px;">Tidak ada les yg sesuai dengan pencarian </p>
+        @endif
         </div>
     </div>
 @endsection
-
