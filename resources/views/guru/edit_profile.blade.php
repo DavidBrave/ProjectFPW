@@ -51,12 +51,12 @@
     <div id="dld-container">
         <div id="temp-dld">
             <h4>Edit Profile</h4><br>
-            <form action="/edit" method="post">
+            <form action="/guru/edit" method="post" enctype="multipart/form-data">
                 @csrf
                 @if ($guru->Guru_Photo)
                     <div id="photo-profile" style="background-image: url('{{asset("storage/Photos/".$guru->Guru_Photo)}}'); position: relative;">
                 @else
-                    <div id="photo-profile" style="background-image: url('{{asset("storage/Photos/nophoto.png")}}')">
+                    <div id="photo-profile" style="background-image: url('{{asset("storage/Photos/nophoto.png")}}'); position: relative;">
                 @endif
                     <div class="file-field input-field" id="pp">
                     @if (session("dark") == "true")
@@ -65,17 +65,32 @@
                         <div class="btn-floating waves-effect waves-light tombol" style="background-color: #42a5f5;">
                     @endif
                             <input type="file" name="imgfile" id="imgfile">
-                            <i class="material-icons">add</i>
+                            <i class="material-icons">edit</i>
                         </div>
                     </div>
                 </div>
                 <br><br><br>
                 Nama : <input type="text" name="name" value="{{$guru->Guru_Nama}}" placeholder="Type your name"><br>
+                @error('name')
+                    <div style="color: red;">{{$message}}</div>
+                @enderror
                 Username : <input type="text" name="username" value="{{$guru->Guru_Username}}" placeholder="Type your username"><br>
+                @error('username')
+                    <div style="color: red;">{{$message}}</div>
+                @enderror
                 Email : <input type="text" name="email" value="{{$guru->Guru_Email}}" placeholder="Type your email"><br>
+                @error('email')
+                    <div style="color: red;">{{$message}}</div>
+                @enderror
                 Alamat : <input type="text" name="alamat" value="{{$guru->Guru_Alamat}}" placeholder="Type your address"><br>
+                @error('alamat')
+                    <div style="color: red;">{{$message}}</div>
+                @enderror
                 Password Baru : <input type="password" name="password" placeholder="Type your password"><br>
-                Confirm password : <input type="text" name="confirm" placeholder="Type your password again"><br>
+                Confirm password : <input type="password" name="confirm" placeholder="Type your password again"><br>
+                @error('confirm')
+                    <div style="color: red;">{{$message}}</div>
+                @enderror
                 @if (session("dark") == "true")
                     <button class="btn waves-effect tombol" type="submit" style="background-color: #616161;">Update<i class="material-icons right">edit</i></button>
                 @else
