@@ -30,7 +30,7 @@ class LoginController extends Controller
             'password' =>['required', 'min:8', 'max:24'],
             'confirm' =>['required', new cekConfMurid($request->password)],
             'email' =>['required', new cekEmail],
-            'file' => ['required'],
+            'file' => ['required','max:2047'],
         ];
 
         $customError = [
@@ -136,7 +136,7 @@ class LoginController extends Controller
             'confirm' =>['required', new cekConfGuru($request->password)],
             'email' =>['required', new cekEmail],
             'address' => ['required'],
-            'file' => ['required']
+            'file' => ['required','max:2047']
         ];
 
         $customError = [

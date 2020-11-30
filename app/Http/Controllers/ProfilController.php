@@ -32,7 +32,8 @@ class ProfilController extends Controller
             "email" => ["required","email"],
             "nama" => ["required"],
             "password" => ["required"],
-            "confPassword" => ["required",new ConfirmPasswordRule($request->password)]
+            "confPassword" => ["required",new ConfirmPasswordRule($request->password)],
+            "file" => ["required", "max:2047"]
         ];
 
         $customMessage = [
