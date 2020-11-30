@@ -116,11 +116,14 @@
         <hr>
         <br><br>
         <div id="form-pelajar">
-            <form action="/registerpelajar" method="post">
+            <form action="/registerpelajar" method="post" enctype="multipart/form-data">
                 @csrf
                 <div id="kotak"></div>
                 Photo: <br><br>
-                <input type="file" name="imgfile" id="imgfile"><br><br>
+                <input type="file" name="file" id="file"><br><br>
+                @error('file')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Username: <input type="text" name="username" placeholder="Type your username"><br>
                 @error('username')
                     <div style="color:red; font-weight:bold"> {{$message}}</div>
@@ -158,12 +161,15 @@
             </form>
         </div>
         <div id="form-pengajar" hidden>
-            <form action="/registerguru" method="post">
+            <form action="/registerguru" method="post" enctype="multipart/form-data">
 
                 @csrf
                 <div id="kotak2"></div>
                 Photo: <br><br>
-                <input type="file" name="imgfile" id="imgfile2"><br><br>
+                <input type="file" name="file" id="file2"><br><br>
+                @error('file')
+                    <div style="color:red; font-weight:bold"> {{$message}}</div>
+                @enderror
                 Username: <input type="text" name="username" placeholder="Type your username"><br>
                 @error('username')
                     <div style="color:red; font-weight:bold"> {{$message}}</div>
@@ -181,7 +187,7 @@
                     <div style="color:red; font-weight:bold"> {{$message}}</div>
                 @enderror
                 Sertifikat: <br><br>
-                <input type="file" name="myfile" id=""><br><br>
+                <input required type="file" name="myfile[]" id="" multiple ><br><br>
                 Password: <input type="password" name="password" placeholder="Type your password"><br>
                 @error('password')
                     <div style="color:red; font-weight:bold"> {{$message}}</div>
