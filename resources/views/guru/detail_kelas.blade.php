@@ -63,8 +63,8 @@
                     <i class="large material-icons">mode_edit</i>
                 </a>
                 <ul>
-                    <li><a class="btn-floating purple lighten-2" href="#"><i class="material-icons">chat</i></a></li>
-                    <li><a class="btn-floating blue" href="#"><i class="material-icons">attach_file</i></a></li>
+                    <li><form action="/guru/kirim_chat/{{$les->Les_ID}}" method="get"><button class="btn-floating purple lighten-2" type="submit"><i class="material-icons">chat</i></button></form></li>
+                    <li><form action="/guru/kirim_tugas/{{$les->Les_ID}}" method="get"><button class="btn-floating blue" type="submit"><i class="material-icons">attach_file</i></button></form></li>
                 </ul>
             </div>
             <h5 style="margin-left: 5px;">Murid</h5><br>

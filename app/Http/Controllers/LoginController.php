@@ -11,8 +11,7 @@ use App\Rules\cekEmail;
 use App\Rules\UsernameAda;
 
 use App\Admin;
-
-
+use App\Sertifikat;
 use App\Tingkat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +30,7 @@ class LoginController extends Controller
             'password' =>['required', 'min:8', 'max:24'],
             'confirm' =>['required', new cekConfMurid($request->password)],
             'email' =>['required', new cekEmail],
+            'file' => ['required'],
         ];
 
         $customError = [
@@ -46,7 +46,11 @@ class LoginController extends Controller
         $email = $request->email;
         $name = $request->name;
         $tingkat = $request->tingkat;
-        // $photo = $request->photo;
+        $file = $request->file('file');
+
+        $tujuan_upload = 'foto';
+        $file->move($tujuan_upload, $file->getClientOriginalName());
+
 
         $allMurid = Murid::select('*')->get();
         $dataMurid = $allMurid[count($allMurid)-1];
@@ -68,8 +72,7 @@ class LoginController extends Controller
         $newMurid->Murid_Nama = $name;
         $newMurid->Murid_Tingkat = $tingkat;
         $newMurid->Murid_Email = $email;
-        // $newMurid->Murid_Photo = $photo;
-        $newMurid->Murid_Photo = "test.jpg";
+        $newMurid->Murid_Photo = $file->getClientOriginalName();
 
         $newMurid->save();
 
@@ -138,7 +141,8 @@ class LoginController extends Controller
             'password' =>['required', 'min:8', 'max:24'],
             'confirm' =>['required', new cekConfGuru($request->password)],
             'email' =>['required', new cekEmail],
-            'address' => ['required']
+            'address' => ['required'],
+            'file' => ['required']
         ];
 
         $customError = [
@@ -155,7 +159,20 @@ class LoginController extends Controller
         $email = $request->email;
         $name = $request->name;
         $alamat = $request->address;
-        // $photo = $request->photo;
+        $file = $request->file('file');
+        $lampiran = array();
+        if($files = $request->file('myfile')){
+            foreach($files as $item){
+                $name = $item->getClientOriginalName();
+                $item->move('lampiran', $name);
+                $lampiran[] = $name;
+            }
+        }
+
+
+        $tujuan_upload = 'foto';
+        $file->move($tujuan_upload, $file->getClientOriginalName());
+
 
         $allGuru = Guru::select('*')->get();
         $dataGuru = $allGuru[count($allGuru)-1];
@@ -176,11 +193,18 @@ class LoginController extends Controller
         $newGuru->Guru_Alamat = $alamat;
         $newGuru->Guru_Nama = $name;
         $newGuru->Guru_Email = $email;
-        // $newGuru->Guru_Photo = $photo;
-        $newGuru->Guru_Photo = "test.jpg";
+        $newGuru->Guru_Photo = $file->getClientOriginalName();
         $newGuru->Diterima = 0;
 
         $newGuru->save();
+
+        foreach($lampiran as $temp){
+            $newSerti = new Sertifikat;
+            $newSerti->id = null;
+            $newSerti->Guru_ID = $id;
+            $newSerti->Sertifikat_Photo = $temp;
+            $newSerti->save();
+        }
 
         echo "<script>alert('Register Berhasil')</script>";
 
