@@ -157,4 +157,36 @@ class GuruController extends Controller
         $les = Les::where("Les_ID", $id)->get();
         return view("guru.detail_kelas", ["les" => $les[0]]);
     }
+
+    public function showKirimTugas($id, Request $request)
+    {
+        $les = Les::where("Les_ID", $id)->get();
+        return view("guru.kirim_tugas", ["les" => $les[0]]);
+    }
+
+    public function showEdit(Request $request)
+    {
+        $guru = $request->session()->get("guruLogin");
+        return view("guru.edit_profile", ["guru" => $guru]);
+    }
+
+    public function kirim(Request $request)
+    {
+        // $rules = [
+        //     'myfile' => ["required", "mimes:jpg,png,jpeg,zip,pdf,docx,pptx,txt", "max:15360"]
+        // ];
+        // $customError = [
+        //     'myfile.required' => "Pilih file yang ingin dikirim",
+        //     'myfile.mimes' => "Format file salah",
+        //     'myfile.max' => "Besar file maksimal 15MB"
+        // ];
+        // $this->validate($request, $rules, $customError);
+
+        // $file = $request->file('myfile');
+        // $desc = $request->desc;
+        // $lesId = $request->id;
+        // $guruId = $request->session()->get("guruLogin")->Guru_ID;
+
+        // dd($file);
+    }
 }

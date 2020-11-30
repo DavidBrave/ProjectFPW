@@ -13,6 +13,9 @@
         #daftar-les-container{
             padding: 30px 50px 50px 50px;
         }
+        #courses{
+            color: #ff8282;
+        }
     </style>
     {{-- <br><br><br><br> --}}
     {{-- <h1>Welcome , {{$murid->Murid_Username}}</h1> --}}
