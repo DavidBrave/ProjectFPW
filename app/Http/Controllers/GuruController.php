@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Guru;
 use App\Les;
+use App\Mail\TaskMail;
 use App\Murid;
 use App\Pelajaran;
 use App\Rules\cekEmail;
@@ -13,6 +14,7 @@ use App\Sertifikat;
 use App\Tingkat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class GuruController extends Controller
 {
@@ -251,21 +253,58 @@ class GuruController extends Controller
 
     public function kirim(Request $request)
     {
-        // $rules = [
-        //     'myfile' => ["required", "mimes:jpg,png,jpeg,zip,pdf,docx,pptx,txt", "max:15360"]
-        // ];
-        // $customError = [
-        //     'myfile.required' => "Pilih file yang ingin dikirim",
-        //     'myfile.mimes' => "Format file salah",
-        //     'myfile.max' => "Besar file maksimal 15MB"
-        // ];
-        // $this->validate($request, $rules, $customError);
+        $rules = [
+            'myfile' => ["required"]
+        ];
 
-        // $file = $request->file('myfile');
-        // $desc = $request->desc;
-        // $lesId = $request->id;
-        // $guruId = $request->session()->get("guruLogin")->Guru_ID;
+        $customError = [
+            'myfile.required' => "Pilih file yang ingin dikirim"
+        ];
 
-        // dd($file);
+        $this->validate($request, $rules, $customError);
+
+        $guruEmail = $request->session()->get("guruLogin")->Guru_Email;
+        $lesId = $request->id;
+        $les = Les::find($lesId);
+        $namaLes = $les->Nama;
+        $files = $request->file('myfile');
+        $desc = $request->desc;
+
+        $checkSize = true;
+        foreach ($files as $file) {
+            $size = $file->getSize();
+            if($size > 15728640){ //15MB
+                $checkSize = false;
+            }
+        }
+
+        if($checkSize){
+            $allowedFileExtension = ['pdf', 'docx', 'pptx', 'zip', 'png', 'jpg', 'jpeg'];
+            $check = false;
+            foreach ($files as $file) {
+                $extension = $file->getClientOriginalExtension();
+                $check = in_array($extension, $allowedFileExtension);
+            }
+
+            if($check){
+                $data = [];
+                foreach ($files as $file) {
+                    $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)."_".time().".".$file->getClientOriginalExtension();
+                    array_push($data, $filename);
+                    $file->storeAs("public/Lampiran_Tugas", $filename);
+                }
+                foreach ($les->murid as $m) {
+                    Mail::to($m->Murid_Email)->send(new TaskMail($guruEmail, "Tugas ".$namaLes, $desc, $data));
+                }
+                $request->session()->flash('message', 'File berhasil dikirim');
+                return back();
+            }else{
+                $request->session()->flash('pesan', 'Format file tidak sesuai');
+                return back();
+            }
+        }else{
+            $request->session()->flash('pesan', 'Besar file maksimal 15MB');
+            return back();
+        }
     }
 }
