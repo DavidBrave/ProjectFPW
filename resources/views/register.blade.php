@@ -66,7 +66,7 @@
             background-image: url("Images/nophoto.png");
             background-color: gray;
         }
-        a{
+        #pengajar:hover{
             color: black;
         }
     </style>
@@ -111,7 +111,7 @@
         <h2>Register</h2>
         <div id="register-navbar">
             <a href="javascript:void(0)"><h5 id="pelajar">Pelajar</h5></a>
-            <a href="javascript:void(0)"><h5 id="pengajar">Pengajar</h5></a>
+            <a href="javascript:void(0)" style="color: black;"><h5 id="pengajar">Pengajar</h5></a>
         </div>
         <hr>
         <br><br>
@@ -159,7 +159,6 @@
         </div>
         <div id="form-pengajar" hidden>
             <form action="/registerguru" method="post">
-
                 @csrf
                 <div id="kotak2"></div>
                 Photo: <br><br>

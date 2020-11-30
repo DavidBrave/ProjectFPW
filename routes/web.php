@@ -40,6 +40,9 @@ Route::prefix("guru")->group(function ()
         Route::post("/tutup", "GuruController@tutup");
         Route::get("/kelas", "GuruController@showKelasGuru");
         Route::get("/detail/{id}", "GuruController@detailKelas");
+        Route::get("/kirim_tugas/{id}", "GuruController@showKirimTugas");
+        Route::post("/kirim", "GuruController@kirim");
+        Route::get("/edit_profile", "GuruController@showEdit");
     });
 });
 
