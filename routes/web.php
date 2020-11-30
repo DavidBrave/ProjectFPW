@@ -58,3 +58,13 @@ Route::get('/set_session_kelas', "KelasController@setSessionKelas");
 Route::get('/set_session_kelas_diambil', "KelasMuridController@setSessionKelasMurid");
 Route::get('/murid_rating_kelas', "KelasMuridController@ratingLes");
 Route::get('/murid_keluar_kelas', "KelasMuridController@muridKeluarKelas");
+
+
+Route::prefix("admin")->group(function ()
+{
+    Route::get("/home", "AdminController@Home");
+    Route::get("/guru/baru", "AdminController@GuruBaru");
+    Route::post("/guru/baru", "AdminController@ActionGuruBaru");
+    Route::get("/insert/pelajaran", "AdminController@Pelajaran");
+    Route::post("/insert/pelajaran", "AdminController@InsertPelajaran");
+});
