@@ -41,6 +41,9 @@
                         <input class="file-path validate" type="text" placeholder="Upload one or more files">
                     </div>
                 </div>
+                @if (session("pesan")!=null)
+                    <div style="color: red;">{{session('pesan')}}</div>
+                @endif
                 @error('myfile')
                     <div style="color: red;">{{$message}}</div>
                 @enderror
