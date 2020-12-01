@@ -93,6 +93,8 @@
 </style>
 <script>
     $(document).ready(function () {
+        $('.scrollspy').scrollSpy();
+
         $('.fixed-action-btn').floatingActionButton({
             direction : 'left'
         });
@@ -136,6 +138,7 @@
                 $("#txtPersonal").css("color", "white");
                 $(".temp-les").css("background-color", "#9e9e9e");
                 $(".tombol").css("background-color", "#616161");
+                $(".send").css("color", "#616161");
 
                 Materialize.toast('Dark Mode', 2000, 'rounded');
             }
@@ -158,6 +161,7 @@
                 $("#txtPersonal").css("color", "black");
                 $(".temp-les").css("background-color", "white");
                 $(".tombol").css("background-color", "#42a5f5");
+                $(".send").css("color", "#42a5f5");
 
                 Materialize.toast('Normal Mode', 2000, 'rounded');
             }
@@ -187,7 +191,7 @@
             <div id="menu" style="height: 200px;" hidden>
                 <a href="/murid_profil" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">account_box</i><p style="margin: 0px 0px 0px 35px; width: auto;">Profile saya</p></a>
                 <a href="/kelas_yg_diambil" class="waves-effect menu-item"><i class="material-icons" style="position: absolute; font-size: 30px;">school</i><p style="margin: 0px 0px 0px 35px; width: auto;">Kelas Saya</p></a>
-                <a href="" class="waves-effect menu-item"><i class="material-icons" style="position: absolute; font-size: 30px;">chat</i><p style="margin: 0px 0px 0px 35px; width: auto;">Chat</p></a>
+                <a href="/all_chat" class="waves-effect menu-item"><i class="material-icons" style="position: absolute; font-size: 30px;">chat</i><p style="margin: 0px 0px 0px 35px; width: auto;">Chat</p></a>
                 <a href="/logout" class="waves-effect menu-item bottom"><i class="material-icons" style="position: absolute; font-size: 30px;">exit_to_app</i><p style="margin: 0px 0px 0px 35px; width: auto;">Keluar</p></a>
             </div>
         @endif
@@ -202,7 +206,7 @@
                     <a href="/guru/terima_tolak_murid" class="waves-effect menu-item-kelas">Terima/Tolak Murid</a>
                     <a href="/guru/tutup_kelas" class="waves-effect menu-item-kelas">Tutup kelas</a>
                 </div>
-                <a href="" class="waves-effect menu-item"><i class="material-icons" style="position: absolute; font-size: 30px;">chat</i><p style="margin: 0px 0px 0px 35px; width: auto;">Chat</p></a>
+                <a href="/all_chat" class="waves-effect menu-item"><i class="material-icons" style="position: absolute; font-size: 30px;">chat</i><p style="margin: 0px 0px 0px 35px; width: auto;">Chat</p></a>
                 <a href="/logout" class="waves-effect menu-item bottom"><i class="material-icons" style="position: absolute; font-size: 30px;">exit_to_app</i><p style="margin: 0px 0px 0px 35px; width: auto;">Keluar</p></a>
             </div>
         @endif

@@ -63,7 +63,7 @@
                     <i class="large material-icons">add</i>
                 </a>
                 <ul>
-                    <li><form action="/guru/kirim_chat/{{$les->Les_ID}}" method="get"><button class="btn-floating purple lighten-2" type="submit"><i class="material-icons">chat</i></button></form></li>
+                    <li><form action="/kirim_chat/{{$les->Les_ID}}" method="get"><button class="btn-floating purple lighten-2" type="submit"><i class="material-icons">chat</i></button></form></li>
                     <li><form action="/guru/kirim_tugas/{{$les->Les_ID}}" method="get"><button class="btn-floating blue" type="submit"><i class="material-icons">attach_file</i></button></form></li>
                 </ul>
             </div>

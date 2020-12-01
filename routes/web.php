@@ -47,6 +47,12 @@ Route::prefix("guru")->group(function ()
     });
 });
 
+//chat
+Route::get("/kirim_chat/{id}", "ChatController@showChat");
+Route::get("/send", "ChatController@send");
+Route::get("/refresh/{id}", "ChatController@refreshChat");
+Route::get("/all_chat", "ChatController@showAllChat");
+
 //murid
 Route::get('/murid_home', "HomeController@IndexHomeMurid");
 Route::get('/daftar_kelas', "KelasController@indexKelas");
