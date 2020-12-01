@@ -50,12 +50,11 @@
             <ul class="collection with-header">
                 <h4 style="color: black; margin: 20px;">Profile</h4>
                 @if ($photo)
-                    <img src="{{asset("foto/".$photo)}}" alt="" style="width: 150px; height: 150px; border-radius: 50%; margin: 20px; display: block; margin-left: auto; margin-right: auto;">
+                    <img src="{{asset("storage/Photos/".$photo)}}" alt="" style="width: 150px; height: 150px; border-radius: 50%; margin: 20px; display: block; margin-left: auto; margin-right: auto;">
                 @else
                     <img src="{{asset("storage/Photos/nophoto.png")}}" alt="" style="width: 150px; height: 150px; border-radius: 50%; margin: 20px; display: block; margin-left: auto; margin-right: auto;">
                 @endif
-                <li class="collection-item"> <input type="file" name="file" id="file2"><br><br>
-                </li>
+                <input type="file" name="file" id="file2" style="display: block; margin-left: auto; margin-right: auto;"><br><br>
                 <li class="collection-item"><p style="width: 200px; float: left; margin: 0px;">Nama</p><p style="float: left; margin: 0px;"><input type="text" name="nama" value="{{$nama}}" style="width: 300px;" placeholder="Type your name">
                     @error('nama')
                         <span style="color: red">{{$message}}</span>

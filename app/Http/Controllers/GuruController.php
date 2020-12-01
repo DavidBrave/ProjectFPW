@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Chat;
 use App\Guru;
 use App\Les;
 use App\Mail\TaskMail;
