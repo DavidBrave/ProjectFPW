@@ -87,6 +87,10 @@
             setInterval(function () {
                 $("#chat-container").load("/refresh/" + $("#lesId").val())
             }, 500);
+
+            setTimeout(function () {
+                $("#chat-container").scrollTop($("#chat-container")[0].scrollHeight);
+            }, 4000);
         });
     </script>
     <div id="dld-container">
