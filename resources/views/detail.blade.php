@@ -17,16 +17,6 @@
     <div id="dld-container">
         <div id="temp-dld">
             <h4 style="margin-left: 5px;">{{$les->pelajaran->Pelajaran_Nama}}</h4>
-            @if ($les->pivot->Pengambilan_Status != 2 )
-                <p style="margin-left: 5px;">Status :
-                @if ($les->pivot->Pengambilan_Status == 0)
-                    Permintaan join les belum dikonfirmasi</p>
-                @else
-                    Permintaan join les ditolak</p>
-                @endif
-            @else
-                <p style="margin-left: 5px;">Status : Sedang Mengikuti</p>
-            @endif
             <table>
                 <tr>
                     <td>Tingkat Pendidikan</td>
@@ -59,16 +49,9 @@
                 Deskripsi : <br>
                 {{$les->Deskripsi}}
             </p>
-            @if ($les->pivot->Pengambilan_Status != 2 )
-                <form action="/murid_batal_ajukan_join_les" method="get">
-                    <button class="btn waves-effect red darken-3" type="submit" style="display: block; margin-left: auto; margin-right: auto; margin-top: 40px; width: 120px; font-size: 12px; padding-left: 5px; padding-right: 5px;"
-                    onclick="return confirm('Apakah anda yakin akan membatalkan permintaan untuk join di les ini?')">Membatalkan permintaan untuk join les<i class="material-icons right" style="margin-left: 5px;">close</i></button>
-                </form>
-            @else
-                <form action="/murid_rating_kelas" method="get">
-                    <button class="btn waves-effect red darken-3" type="submit" style="display: block; margin-left: auto; margin-right: auto; margin-top: 40px; width: 120px; font-size: 12px; padding-left: 5px; padding-right: 5px;"
-                     onclick="return confirm('Apakah anda yakin akan keluar dari les ini?')">Keluar Les<i class="material-icons right" style="margin-left: 5px;">exit_to_app</i></button>
-                </form>
+            @if (!session("adminLogin") && !session("guruLogin"))
+                <button class="btn waves-effect green darken-1" type="submit" style="display: block; margin-left: auto; margin-right: auto; margin-top: 40px; width: 190px; font-size: 12px; padding-left: 5px; padding-right: 5px; background-color: #616161;"
+                onclick="return alert('Anda belum login')">Ajukan Pengambilan<i class="material-icons right" style="margin-left: 5px; margin-right: 5px;">check</i></button>
             @endif
         </div>
     </div>

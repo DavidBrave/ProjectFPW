@@ -32,7 +32,8 @@ class ProfilController extends Controller
             "email" => ["required","email"],
             "nama" => ["required"],
             "password" => ["required"],
-            "confPassword" => ["required",new ConfirmPasswordRule($request->password)]
+            "confPassword" => ["required",new ConfirmPasswordRule($request->password)],
+            "file" => ["required", "max:2047"]
         ];
 
         $customMessage = [
@@ -42,11 +43,16 @@ class ProfilController extends Controller
 
         $this->validate($request,$rule,$customMessage);
 
+        $file = $request->file('file');
+        $tujuan_upload = 'foto';
+        $file->move($tujuan_upload, $file->getClientOriginalName());
+
         // $murid = Murid::find($request->session()->get("IDLogin"));
         $murid->Murid_Username = $request->username;
         $murid->Murid_Nama = $request->nama;
         $murid->Murid_Email = $request->email;
         $murid->Murid_Password = bcrypt($request->password);
+        $murid->Murid_Photo = $file->getClientOriginalName();
         $murid->save();
         return redirect("/murid_profil");
     }
@@ -68,6 +74,7 @@ class ProfilController extends Controller
             $password = "";
             $photo = $murid->Murid_Photo;
         }
+
 
         return view("murid.components.EditProfil",[
             "username" => $username,

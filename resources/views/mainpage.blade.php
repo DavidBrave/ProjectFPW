@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Smart Course</title>
-    <link rel="stylesheet" href="{{asset("materialize/css/materialize.css")}}">
     <script src="{{asset("jquery-3.4.1.min.js")}}"></script>
-    <script src="resources\js\jquery-3.4.1.js"></script>
     <link rel="stylesheet" href="{{asset("materialize/css/materialize.css")}}">
-    <link rel="stylesheet" href="{{asset("jquery.js")}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
@@ -28,7 +25,7 @@
         display: grid;
         grid-template-rows: 120px auto 100px;
         background-color: #bfe6ff;
-        min-height: 900px;
+        min-height: 937px;
         height: auto;
     }
     #menu{
@@ -96,6 +93,12 @@
 </style>
 <script>
     $(document).ready(function () {
+        $('.scrollspy').scrollSpy();
+
+        $('.fixed-action-btn').floatingActionButton({
+            direction : 'left'
+        });
+
         $('.timepicker').timepicker({
             twelveHour : false
         });
@@ -135,6 +138,7 @@
                 $("#txtPersonal").css("color", "white");
                 $(".temp-les").css("background-color", "#9e9e9e");
                 $(".tombol").css("background-color", "#616161");
+                $(".send").css("color", "#616161");
 
                 Materialize.toast('Dark Mode', 2000, 'rounded');
             }
@@ -157,6 +161,7 @@
                 $("#txtPersonal").css("color", "black");
                 $(".temp-les").css("background-color", "white");
                 $(".tombol").css("background-color", "#42a5f5");
+                $(".send").css("color", "#42a5f5");
 
                 Materialize.toast('Normal Mode', 2000, 'rounded');
             }
@@ -184,30 +189,32 @@
         @if (session("muridLogin"))
         {{-- @include('includes.headerMurid') --}}
             <div id="menu" style="height: 200px;" hidden>
-                <a href="/murid_profil" class="waves-effect menu-item top">Profil saya</a>
-                <a href="/kelas_yg_diambil" class="waves-effect menu-item">Kelas Saya</a>
-                <a href="" class="waves-effect menu-item">Chat</a>
-                <a href="/logout" class="waves-effect menu-item bottom">Keluar</a>
+                <a href="/murid_profil" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">account_box</i><p style="margin: 0px 0px 0px 35px; width: auto;">Profile saya</p></a>
+                <a href="/kelas_yg_diambil" class="waves-effect menu-item"><i class="material-icons" style="position: absolute; font-size: 30px;">school</i><p style="margin: 0px 0px 0px 35px; width: auto;">Kelas Saya</p></a>
+                <a href="/all_chat" class="waves-effect menu-item"><i class="material-icons" style="position: absolute; font-size: 30px;">chat</i><p style="margin: 0px 0px 0px 35px; width: auto;">Chat</p></a>
+                <a href="/logout" class="waves-effect menu-item bottom"><i class="material-icons" style="position: absolute; font-size: 30px;">exit_to_app</i><p style="margin: 0px 0px 0px 35px; width: auto;">Keluar</p></a>
             </div>
         @endif
         @if (session("guruLogin"))
             <div id="menu" hidden>
-                <a href="/guru_profile" class="waves-effect menu-item top">Profil saya</a>
-                <a href="javascript:void(0)" class="waves-effect menu-item" id="kelas">Kelas</a>
+                <a href="/guru/profile" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">account_box</i><p style="margin: 0px 0px 0px 35px; width: auto;">Profile saya</p></a>
+                <a href="/guru/edit_profile" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">edit</i><p style="margin: 0px 0px 0px 35px; width: auto;">Edit profile</p></a>
+                <a href="javascript:void(0)" class="waves-effect menu-item" id="kelas"><i class="material-icons" style="position: absolute; font-size: 30px;">school</i><p style="margin: 0px 0px 0px 35px; width: auto;">Kelas</p></a>
                 <div id="menu-kelas" hidden>
-                    <a href="" class="waves-effect menu-item-kelas">Kelas saya</a>
-                    <a href="/create_class" class="waves-effect menu-item-kelas">Buat kelas</a>
-                    <a href="" class="waves-effect menu-item-kelas">Tutup kelas</a>
+                    <a href="/guru/kelas" class="waves-effect menu-item-kelas">Kelas saya</a>
+                    <a href="/guru/create_class" class="waves-effect menu-item-kelas">Buat kelas</a>
+                    <a href="/guru/terima_tolak_murid" class="waves-effect menu-item-kelas">Terima/Tolak Murid</a>
+                    <a href="/guru/tutup_kelas" class="waves-effect menu-item-kelas">Tutup kelas</a>
                 </div>
-                <a href="" class="waves-effect menu-item">Chat</a>
-                <a href="/logout" class="waves-effect menu-item bottom">Keluar</a>
+                <a href="/all_chat" class="waves-effect menu-item"><i class="material-icons" style="position: absolute; font-size: 30px;">chat</i><p style="margin: 0px 0px 0px 35px; width: auto;">Chat</p></a>
+                <a href="/logout" class="waves-effect menu-item bottom"><i class="material-icons" style="position: absolute; font-size: 30px;">exit_to_app</i><p style="margin: 0px 0px 0px 35px; width: auto;">Keluar</p></a>
             </div>
         @endif
         @if (session("adminLogin"))
             <div id="menu" hidden>
                 {{-- MENU ITEM ADMIN --}}
-                <a href="#" class="waves-effect menu-item top">Profil saya</a>
-                <a href="/logout" class="waves-effect menu-item bottom">Keluar</a>
+                <a href="#" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">account_box</i><p style="margin: 0px 0px 0px 35px; width: auto;">Profile saya</p></a>
+                <a href="/logout" class="waves-effect menu-item bottom"><i class="material-icons" style="position: absolute; font-size: 30px;">exit_to_app</i><p style="margin: 0px 0px 0px 35px; width: auto;">Keluar</p></a>
             </div>
         @endif
         <div class="switch" id="mode">
