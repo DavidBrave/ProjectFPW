@@ -168,7 +168,7 @@
         });
 
         $("#kelas").click(function () {
-           $("#menu-kelas").show();
+           $("#menu-kelas").toggle();
         });
     });
 </script>
@@ -201,10 +201,11 @@
                 <a href="/guru/edit_profile" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">edit</i><p style="margin: 0px 0px 0px 35px; width: auto;">Edit profile</p></a>
                 <a href="javascript:void(0)" class="waves-effect menu-item" id="kelas"><i class="material-icons" style="position: absolute; font-size: 30px;">school</i><p style="margin: 0px 0px 0px 35px; width: auto;">Kelas</p></a>
                 <div id="menu-kelas" hidden>
-                    <a href="/guru/kelas" class="waves-effect menu-item-kelas">Kelas saya</a>
-                    <a href="/guru/create_class" class="waves-effect menu-item-kelas">Buat kelas</a>
-                    <a href="/guru/terima_tolak_murid" class="waves-effect menu-item-kelas">Terima/Tolak Murid</a>
-                    <a href="/guru/tutup_kelas" class="waves-effect menu-item-kelas">Tutup kelas</a>
+                    <a href="/guru/kelas" class="waves-effect menu-item-kelas"><i class="material-icons" style="position: absolute; font-size: 20px;">school</i><p style="margin: 0px 0px 0px 35px; width: auto;">Kelas</p></a>
+                    <a href="/guru/create_class" class="waves-effect menu-item-kelas"><i class="material-icons" style="position: absolute; font-size: 20px;">create</i><p style="margin: 0px 0px 0px 35px; width: auto;">Buat kelas</p></a>
+                    <a href="/guru/terima_tolak_murid" class="waves-effect menu-item-kelas"><i class="material-icons" style="position: absolute; font-size: 20px;">people</i><p style="margin: 0px 0px 0px 35px; width: auto;">Terima/Tolak Murid</p></a>
+                    <a href="/guru/tutup_kelas" class="waves-effect menu-item-kelas"><i class="material-icons" style="position: absolute; font-size: 20px;">close</i><p style="margin: 0px 0px 0px 35px; width: auto;">Tutup kelas</p></a>
+                    <a href="/guru/history" class="waves-effect menu-item-kelas"><i class="material-icons" style="position: absolute; font-size: 20px;">history</i><p style="margin: 0px 0px 0px 35px; width: auto;">History</p></a>
                 </div>
                 <a href="/all_chat" class="waves-effect menu-item"><i class="material-icons" style="position: absolute; font-size: 30px;">chat</i><p style="margin: 0px 0px 0px 35px; width: auto;">Chat</p></a>
                 <a href="/logout" class="waves-effect menu-item bottom"><i class="material-icons" style="position: absolute; font-size: 30px;">exit_to_app</i><p style="margin: 0px 0px 0px 35px; width: auto;">Keluar</p></a>
