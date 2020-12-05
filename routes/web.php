@@ -44,6 +44,7 @@ Route::prefix("guru")->group(function ()
         Route::post("/kirim", "GuruController@kirim");
         Route::get("/edit_profile", "GuruController@showEdit");
         Route::post("/edit", "GuruController@edit");
+        Route::get("/history", "GuruController@history");
     });
 });
 
