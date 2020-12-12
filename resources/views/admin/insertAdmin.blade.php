@@ -205,16 +205,35 @@
 </script>
 <div id="dld-container">
     <div id="temp-dld">
-        <h4>Insert Pelajaran</h4><br>
+        <h4>Insert Admin</h4><br>
         <form action="" method="post">
             @csrf
-            Nama Pelajaran : <input type="text" name="nama_pelajaran" value="" placeholder="Pelajaran..."><br>
-            {{-- @error('nama_pelajaran')
-                <div style="color: red;">{{$message}}</div>
-            @enderror --}}
-            @if($errors->any())
+            Nama Admin : <input type="text" name="nama_admin" value="" placeholder="Nama Admin"><br>
+            @error('nama_admin')
+                <div style="color: red;">{{$message}}</div> <br>
+            @enderror
+
+
+            Username Admin : <input type="text" name="username_admin" value="" placeholder="Username Admin"><br>
+            @error('username_admin')
+                <div style="color: red;">{{$message}}</div> <br>
+            @enderror
+
+            Password Admin : <input type="password" name="password_admin" value="" placeholder="Password Admin"><br>
+            @error('password_admin')
+                <div style="color: red;">{{$message}}</div> <br>
+            @enderror
+
+            Konfirmasi Password : <input type="password" name="konfirmasi_admin" value="" placeholder="Konfirmasi Password"><br>
+            @error('konfirmasi_admin')
+                <div style="color: red;">{{$message}}</div> <br>
+            @enderror
+
+
+
+            {{-- @if($errors->any())
                 <div style="color: red;">{{$errors->first()}}</div>
-            @endif
+            @endif --}}
 
             <br>
 
@@ -228,35 +247,6 @@
     </div>
 
     <br><br><br>
-
-    <h4 style="text-align: center">List Pelajaran</h4>
-    <div class="table-wrapper">
-        <table class="fl-table">
-        <thead>
-            <tr>
-
-                <th>No.</th>
-                <th>Pelajaran Id</th>
-                <th>Nama Pelajaran</th>
-                <th>Total Les</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($list_pelajaran as $pelajaran)
-
-                <tr>
-                    <td>{{ $pelajaran->no }}</td>
-                    <td>{{ $pelajaran->id }}</td>
-                    <td>{{ $pelajaran->name }}</td>
-                    <td>{{ $pelajaran->ctr }}</td>
-
-                </tr>
-
-            @endforeach
-        </tbody>
-        </table>
-    </div>
 
 
 </div>
