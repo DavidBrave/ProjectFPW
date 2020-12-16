@@ -19,6 +19,6 @@ class Admin extends Authenticatable
     ];
 
     public function getAuthPassword(){
-        return $this->Admin_Password;
+        return $this->admin_password;
     }
 }

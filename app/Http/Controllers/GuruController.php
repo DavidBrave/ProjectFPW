@@ -308,4 +308,11 @@ class GuruController extends Controller
             return back();
         }
     }
+
+    public function history(Request $request)
+    {
+        $guru = $request->session()->get("guruLogin");
+        $les = Les::withTrashed()->where("Guru_ID", $guru->Guru_ID)->get();
+        return view("guru.history", ["les" => $les]);
+    }
 }
