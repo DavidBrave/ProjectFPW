@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class cekAdmin
+class cekMurid
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,8 @@ class cekAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(!$request->session()->has("adminLogin")){
-            $request->session()->flash("message", "Halaman ini hanya bisa diakses oleh Admin. Silahkan login terlebih dahulu");
+        if(!$request->session()->has("muridLogin")){
+            $request->session()->flash("message", "Halaman ini hanya bisa diakses oleh murid. Silahkan login terlebih dahulu");
             return redirect("/login");
         }
         return $next($request);
