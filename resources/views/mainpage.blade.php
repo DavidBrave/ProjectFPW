@@ -214,7 +214,15 @@
         @if (session("adminLogin"))
             <div id="menu" hidden>
                 {{-- MENU ITEM ADMIN --}}
-                <a href="#" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">account_box</i><p style="margin: 0px 0px 0px 35px; width: auto;">Profile saya</p></a>
+
+                <a href="/admin/profile" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">account_box</i><p style="margin: 0px 0px 0px 35px; width: auto;">Profile saya</p></a>
+
+                <a href="/admin/insert/admin" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">person_add</i><p style="margin: 0px 0px 0px 35px; width: auto;">Tambah Admin</p></a>
+
+                <a href="/admin/insert/pelajaran" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">edit</i><p style="margin: 0px 0px 0px 35px; width: auto;">Insert Pelajaran</p></a>
+
+                <a href="/admin/guru/baru" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">school</i><p style="margin: 0px 0px 0px 35px; width: auto;">Terima Guru</p></a>
+
                 <a href="/logout" class="waves-effect menu-item bottom"><i class="material-icons" style="position: absolute; font-size: 30px;">exit_to_app</i><p style="margin: 0px 0px 0px 35px; width: auto;">Keluar</p></a>
             </div>
         @endif

@@ -1,42 +1,87 @@
-@extends('mainpage')
-@section('content')
-<style>
-    #temp-dld{
-        position: relative;
-        background-color: white;
-        border-radius: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        width: 800px;
-        padding: 20px 40px 40px 40px;
-        margin-top: 50px;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Guru Baru</title>
+
+
+    <style>
+
+    body {
+        background-color: #bfe6ff;
     }
-    .fixed-action-btn{
-        position: absolute;
+
+    #header{
+        /* background-color: #5f9abf; */
+        padding: 10px;
+        position: sticky;
+        top: 0px;
+        z-index: 999;
     }
-    #photo-profile{
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
+    #logo{
+        float: left;
+        width: 80px;
+        height: 80px;
+        margin-left: 20px;
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+    #course_name{
+        float: left;
+        font-size: 40px;
+        color: white;
+        margin: 10px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        margin-top: 15px;
+    }
+    #navbar{
+        float: right;
+        padding-top: 5px;
+    }
+    #navbar li{
+        display: inline;
+        line-height: 50px;
         margin: 20px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
     }
-    #pp{
-        position: absolute;
-        top: -10px;
-        right: 0px;
+    a{
+        text-decoration: none;
+        font-size: 20px;
+        color: white;
+    }
+    li a:hover{
+        color: #1f333f;
+    }
+    .account{
+        float: right;
+        margin-top: 20px;
+        margin-right: 10px;
+        border-radius: 30px;
+        width: auto;
+        height: 50px;
+        padding: 5px;
+        background-color: #8fc2e2;
+    }
+    .txt-name{
+        float: right;
+        font-size: 20px;
+        margin: 10px;
+        margin-top: 5px;
     }
 
+    h2{
+            text-align: center;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            padding: 30px 0;
+        }
 
 
-
-    .table-wrapper{
-            margin: 10px 200px 70px;
+        .table-wrapper{
+            margin: 10px 70px 70px;
             box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
         }
 
@@ -76,8 +121,10 @@
 
         .fl-table tr:nth-child(even) {
             background: #95bedb;
+            /* background: #F8F8F8; */
         }
 
+        /* Responsive */
 
         @media (max-width: 767px) {
             .fl-table {
@@ -85,6 +132,7 @@
                 width: 100%;
             }
             .table-wrapper:before{
+                /* content: "Scroll horizontally >"; */
                 display: block;
                 text-align: right;
                 font-size: 11px;
@@ -197,59 +245,72 @@
             background: #e33b3b;
         }
 
-</style>
-@if (session("message")!=null)
-    <script>alert("{{session('message')}}");</script>
-@endif
-<script>
-</script>
-<div id="dld-container">
-    <div id="temp-dld">
-        <h4>Insert Pelajaran</h4><br>
-        <form action="" method="post">
-            @csrf
-            Nama Pelajaran : <input type="text" name="nama_pelajaran" value="" placeholder="Pelajaran..."><br>
-            {{-- @error('nama_pelajaran')
-                <div style="color: red;">{{$message}}</div>
-            @enderror --}}
-            @if($errors->any())
-                <div style="color: red;">{{$errors->first()}}</div>
-            @endif
+    </style>
 
-            <br>
+</head>
+<body>
+    <div id="header">
 
-            @if (session("dark") == "true")
-                <button class="btn waves-effect tombol" type="submit" style="background-color: #616161;">Insert<i class="material-icons right">edit</i></button>
-            @else
-                <button class="btn waves-effect tombol" type="submit" style="background-color: #42a5f5;">Insert<i class="material-icons right">edit</i></button>
-            @endif
-        </form>
+        <ul id="navbar">
+            <li><a href="/admin/home">Home</a></li>
+            <li><a href="/admin/insert/pelajaran" id="about">Insert Pelajaran</a></li>
+            <li><a href="/admin/guru/baru">Guru Baru</a></li>
+        </ul>
 
     </div>
 
     <br><br><br>
 
-    <h4 style="text-align: center">List Pelajaran</h4>
     <div class="table-wrapper">
         <table class="fl-table">
         <thead>
             <tr>
 
-                <th>No.</th>
-                <th>Pelajaran Id</th>
-                <th>Nama Pelajaran</th>
-                <th>Total Les</th>
+                <th>Username</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Alamat</th>
+                <th colspan="3">Action</th>
 
             </tr>
         </thead>
         <tbody>
-            @foreach ($list_pelajaran as $pelajaran)
+            @foreach ($guru_baru as $guru)
 
                 <tr>
-                    <td>{{ $pelajaran->no }}</td>
-                    <td>{{ $pelajaran->id }}</td>
-                    <td>{{ $pelajaran->name }}</td>
-                    <td>{{ $pelajaran->ctr }}</td>
+                    <td>{{ $guru->Guru_Username}}</td>
+                    <td>{{ $guru->Guru_Nama}}</td>
+                    <td>{{ $guru->Guru_Email }}</td>
+                    <td>{{ $guru->Guru_Alamat }}</td>
+                    <td>
+                        <form action="/admin/guru/baru" method="post">
+                            @csrf
+                            <input type="hidden" name="guru_id" value="{{$guru->Guru_ID}}">
+                            <input type="hidden" name="type" value="detail">
+                            <Button style="color: black">Detail</Button>
+
+                        </form>
+                    </td>
+
+                    <td>
+                        <form action="/admin/guru/baru" method="post">
+                            @csrf
+                            <input type="hidden" name="guru_id" value="{{$guru->Guru_ID}}">
+                            <input type="hidden" name="type" value="accept">
+                            <Button class="button_confirm">Terima</Button>
+
+                        </form>
+                    </td>
+
+                    <td>
+                        <form action="/admin/guru/baru" method="post">
+                            @csrf
+                            <input type="hidden" name="guru_id" value="{{$guru->Guru_ID}}">
+                            <input type="hidden" name="type" value="reject">
+                            <Button class="button_reject">Tolak</Button>
+
+                        </form>
+                    </td>
 
                 </tr>
 
@@ -259,5 +320,6 @@
     </div>
 
 
-</div>
-@endsection
+
+</body>
+</html>

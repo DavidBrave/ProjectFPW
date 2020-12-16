@@ -2,24 +2,56 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
 use App\Guru;
 use App\Les;
 use App\Murid;
 use App\Pelajaran;
+use App\Rules\cekNamaPelajaran;
+use App\Rules\cekUsername;
 use App\Sertifikat;
 use App\Tingkat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
     public function Home()
     {
+
+        $admin =  session()->get("adminLogin");
+        if ($admin == null) {
+            return redirect('/');
+        }
+
         return view('admin.home');
     }
 
+
+
+    public function Profile()
+    {
+        $admin =  session()->get("adminLogin");
+        if ($admin == null) {
+            return redirect('/');
+        }
+
+
+        return view('admin.adminProfile', [
+            'admin' => $admin
+        ]);
+    }
+
+
     public function GuruBaru()
     {
+
+        $admin =  session()->get("adminLogin");
+        if ($admin == null) {
+            return redirect('/');
+        }
+
         $semua_guru = Guru::all();
 
         $guru_baru = [];
@@ -39,8 +71,14 @@ class AdminController extends Controller
     public function ActionGuruBaru(Request $request)
     {
 
+        $admin =  session()->get("adminLogin");
+        if ($admin == null) {
+            return redirect('/');
+        }
+
+
         if ($request->type == "detail") {
-            #detail profile guru
+            #detail profile guru kalo perlu
         }
         if ($request->type == "accept") {
             Guru::where('Guru_ID', '=', $request->guru_id)->update(['Diterima' => 1]);
@@ -55,6 +93,12 @@ class AdminController extends Controller
 
     public function Pelajaran()
     {
+
+        $admin =  session()->get("adminLogin");
+        if ($admin == null) {
+            return redirect('/');
+        }
+
         $pelajaran = Pelajaran::all();
         $list_les = Les::all();
 
@@ -90,13 +134,31 @@ class AdminController extends Controller
 
     public function InsertPelajaran(Request $request)
     {
+
+        $admin =  session()->get("adminLogin");
+        if ($admin == null) {
+            return redirect('/');
+        }
+
+
+        $rules = [
+            'nama_pelajaran' => ['required', new cekNamaPelajaran($request->nama_pelajaran)]
+        ];
+
+        $custom_error = [
+            'nama_pelajaran.required' => 'Nama Pelajaran Harus Diisi'
+        ];
+
+        $this->validate($request, $rules, $custom_error);
+
         $pelajaran = Pelajaran::all();
 
         $valid = true;
         $ctr = 0;
         foreach ($pelajaran as $p) {
-            if (strtoupper($p->Pelajaran_Nama) == strtoupper($request->name) || $request->name == "") {
+            if (strtoupper($p->Pelajaran_Nama) == strtoupper($request->nama_pelajaran) || $request->nama_pelajaran == "") {
                 $valid = false;
+                return Redirect::back()->withErrors(['Pelajaran Sudah Terdapat Pada Database']);
             }
             $ctr = (int) substr($p->Pelajaran_ID, 3);
             $ctr = $ctr + 1;
@@ -111,9 +173,7 @@ class AdminController extends Controller
 
             $pelajaran = new Pelajaran();
             $pelajaran->Pelajaran_ID = $id_pelajaran;
-            $pelajaran->Pelajaran_Nama = $request->name;
-
-            //dd($pelajaran);
+            $pelajaran->Pelajaran_Nama = $request->nama_pelajaran;
 
             $pelajaran->save();
 
@@ -122,6 +182,80 @@ class AdminController extends Controller
 
         return redirect('/admin/insert/pelajaran');
 
+
+
+    }
+
+
+    public function Admin()
+    {
+        $admin =  session()->get("adminLogin");
+        if ($admin == null) {
+            return redirect('/');
+        }
+
+        return view('admin.insertAdmin');
+    }
+
+    public function InsertAdmin(Request $request)
+    {
+        $admin =  session()->get("adminLogin");
+        if ($admin == null) {
+            return redirect('/');
+        }
+
+
+        $rules = [
+            'nama_admin' => ['required'],
+            'username_admin' => ['required', new cekUsername($request->username_admin)],
+            'password_admin' => ['required'],
+            'konfirmasi_admin' => ['same:password_admin'],
+        ];
+
+        $custom_error = [
+            'nama_admin.required' => 'Nama Admin Harus Diisi',
+            'username_admin.required' => 'Username Admin Harus Diisi',
+            'password_admin.required' => 'Password Admin Harus Diisi',
+            'konfirmasi_admin.same' => 'Konfirmasi Harus Sama Dengan Password',
+        ];
+
+
+        $this->validate($request, $rules, $custom_error);
+
+
+
+        $admins = Admin::all();
+
+        $valid = true;
+        $ctr = 0;
+        foreach ($admins as $a) {
+            if (strtoupper($a->Admin_Username) == strtoupper($request->username_admin)) {
+                $valid = false;
+                return Redirect::back()->withErrors(['Admin Sudah Terdaftar']);
+            }
+            $ctr = (int) substr($a->Admin_ID, 3);
+            $ctr = $ctr + 1;
+        }
+
+
+        $ctr = (string) $ctr;
+        $id_admin = "";
+        if ($valid) {
+            $id = str_pad($ctr, 4, "0", STR_PAD_LEFT);
+            $id_admin = "ADM".$id;
+
+            $admin = new Admin();
+            $admin->Admin_ID = $id_admin;
+            $admin->Admin_Nama = $request->nama_admin;
+            $admin->Admin_Username = $request->username_admin;
+            $admin->Admin_Password = bcrypt($request->password_admin);
+
+            $admin->save();
+
+        }
+
+
+        return redirect('/');
 
 
     }

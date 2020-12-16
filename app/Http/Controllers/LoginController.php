@@ -86,9 +86,9 @@ class LoginController extends Controller
     {
 
 
-        if ($request->username == 'admin' && $request->username == $request->password) {
-            return redirect('admin/home');
-        }
+        // if ($request->username == 'admin' && $request->username == $request->password) {
+        //     return redirect('admin/home');
+        // }
 
 
         $dataAdmin = [
@@ -118,7 +118,8 @@ class LoginController extends Controller
             return redirect('/');
         }else if(Auth::guard('admin_guard')->attempt($dataAdmin)){
             $admin = Admin::where("Admin_Username", $request->username)->get();
-            $request->session()->put('adminLogin', $admin[0]);
+            session()->put('adminLogin', $admin[0]);
+            // return redirect('/admin/home');
             return redirect('/');
         }else{
             return redirect("/login")->with("pesan","Username atau password salah");
