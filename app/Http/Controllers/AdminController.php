@@ -28,8 +28,6 @@ class AdminController extends Controller
         return view('admin.home');
     }
 
-
-
     public function Profile()
     {
         $admin =  session()->get("adminLogin");
@@ -42,7 +40,6 @@ class AdminController extends Controller
             'admin' => $admin
         ]);
     }
-
 
     public function GuruBaru()
     {
@@ -67,7 +64,6 @@ class AdminController extends Controller
 
     }
 
-
     public function ActionGuruBaru(Request $request)
     {
 
@@ -89,7 +85,6 @@ class AdminController extends Controller
 
         return redirect('admin/guru/baru');
     }
-
 
     public function Pelajaran()
     {
@@ -130,7 +125,6 @@ class AdminController extends Controller
             'list_pelajaran' => $list_pelajaran
         ]);
     }
-
 
     public function InsertPelajaran(Request $request)
     {
@@ -179,13 +173,8 @@ class AdminController extends Controller
 
         }
 
-
         return redirect('/admin/insert/pelajaran');
-
-
-
     }
-
 
     public function Admin()
     {
@@ -237,7 +226,6 @@ class AdminController extends Controller
             $ctr = $ctr + 1;
         }
 
-
         $ctr = (string) $ctr;
         $id_admin = "";
         if ($valid) {
@@ -254,11 +242,23 @@ class AdminController extends Controller
 
         }
 
-
         return redirect('/');
-
-
     }
 
-
+    public function showChart(Request $request)
+    {
+        $arr1 = [];
+        $arr2 = [];
+        $arr3 = [];
+        $guru = Guru::all();
+        for ($i=0; $i < count($guru); $i++) {
+            $jumlahMurid = Guru::join('Les', 'Les.Guru_ID', '=', 'Guru.Guru_ID')
+            ->join('Pengambilan_Pelajaran', 'Pengambilan_Pelajaran.Pengambilan_Les', '=', 'Les.Les_ID')
+            ->where("Guru.Guru_ID", $guru[$i]->Guru_ID)->get(['Pengambilan_Pelajaran.Pengambilan_Murid']);
+            array_push($arr2, count($jumlahMurid));
+            array_push($arr1, $guru[$i]->Guru_ID);
+            array_push($arr3, $guru[$i]->Guru_Nama);
+        }
+        return view('admin.grafik', ["arr1" => json_encode($arr1), "arr2" => json_encode($arr2), "arr3" => json_encode($arr3)]);
+    }
 }

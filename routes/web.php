@@ -81,4 +81,5 @@ Route::prefix("admin")->group(function ()
     Route::post("/insert/pelajaran", "AdminController@InsertPelajaran");
     Route::get("/insert/admin", "AdminController@Admin");
     Route::post("/insert/admin", "AdminController@InsertAdmin");
+    Route::get("/laporan", "AdminController@showChart");
 });
