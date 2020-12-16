@@ -48,9 +48,10 @@ class LoginController extends Controller
         $tingkat = $request->tingkat;
         $file = $request->file('file');
 
-        $tujuan_upload = 'foto';
-        $file->move($tujuan_upload, $file->getClientOriginalName());
-
+        // $tujuan_upload = 'foto';
+        // $file->move($tujuan_upload, $file->getClientOriginalName());
+        $filename = pathinfo($request->file("file")->getClientOriginalName(), PATHINFO_FILENAME)."_".time().".".$request->file("file")->getClientOriginalExtension();
+        $request->file("file")->storeAs("public/photos", $filename);
 
         $allMurid = Murid::select('*')->get();
         $dataMurid = $allMurid[count($allMurid)-1];
@@ -72,7 +73,7 @@ class LoginController extends Controller
         $newMurid->Murid_Nama = $name;
         $newMurid->Murid_Tingkat = $tingkat;
         $newMurid->Murid_Email = $email;
-        $newMurid->Murid_Photo = $file->getClientOriginalName();
+        $newMurid->Murid_Photo = $filename;
 
         $newMurid->save();
 
@@ -164,16 +165,20 @@ class LoginController extends Controller
         $lampiran = array();
         if($files = $request->file('myfile')){
             foreach($files as $item){
-                $name = $item->getClientOriginalName();
-                $item->move('lampiran', $name);
-                $lampiran[] = $name;
+                // $name = $item->getClientOriginalName();
+                // $item->move('lampiran', $name);
+                $filename = pathinfo($item->getClientOriginalName(), PATHINFO_FILENAME)."_".time().".".$item->getClientOriginalExtension();
+                $item->storeAs("public/photos", $filename);
+                $lampiran[] = $filename;
             }
         }
 
 
-        $tujuan_upload = 'foto';
-        $file->move($tujuan_upload, $file->getClientOriginalName());
+        // $tujuan_upload = 'foto';
+        // $file->move($tujuan_upload, $file->getClientOriginalName());
 
+        $filename = pathinfo($request->file("file")->getClientOriginalName(), PATHINFO_FILENAME)."_".time().".".$request->file("file")->getClientOriginalExtension();
+        $request->file("file")->storeAs("public/photos", $filename);
 
         $allGuru = Guru::select('*')->get();
         $dataGuru = $allGuru[count($allGuru)-1];
@@ -194,7 +199,7 @@ class LoginController extends Controller
         $newGuru->Guru_Alamat = $alamat;
         $newGuru->Guru_Nama = $name;
         $newGuru->Guru_Email = $email;
-        $newGuru->Guru_Photo = $file->getClientOriginalName();
+        $newGuru->Guru_Photo = $filename;
         $newGuru->Diterima = 0;
 
         $newGuru->save();
