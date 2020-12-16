@@ -32,7 +32,7 @@
             #toast-container {
                 top: 10%;
                 left: 35%;
-                width: 570px;
+                width: 590px;
             }
         </style>
         <script>Materialize.toast("{{session("message")}}", 2000, 'rounded')</script>
