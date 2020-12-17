@@ -16,15 +16,17 @@ class KelasController extends Controller
         // $murid = Murid::find($idMurid)->get();
         $kelas = Les::select("*");
         if($request->btnCari == "-1"){
+            if($request->edCari != ""){
+                $kelas = Les::where("Nama","LIKE","%".$request->edCari."%");
+                $idGurus = Guru::where("Guru_Nama","LIKE","%".$request->edCari."%")->get();
+                if($idGurus!=null){
+                    foreach ($idGurus as $item) {
+                        $kelas = $kelas->orWhere("Guru_ID",$item->Guru_ID);
+                    }
+                }
+            }
             if($request->tingkatan != "none"){
                 $kelas = $kelas->where("Tingkatan_ID",$request->tingkatan);
-            }
-            if($request->edCari != ""){
-                $kelas = $kelas->where("Nama","LIKE","%".$request->edCari."%");
-                $idGurus = Guru::where("Guru_Nama","LIKE","%".$request->edCari."%")->get();
-                foreach ($idGurus as $item) {
-                    $kelas = $kelas->orWhere("Guru_ID",$item->Guru_ID);
-                }
             }
         }
 

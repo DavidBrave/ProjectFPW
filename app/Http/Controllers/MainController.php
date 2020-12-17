@@ -29,26 +29,14 @@ class MainController extends Controller
     {
         $kelas = Les::select("*");
         if($request->btnCari == "-1"){
-            if($request->tingkatan != ""){
+            if($request->tingkatan != "none"){
                 $kelas = $kelas->where("Tingkatan_ID",$request->tingkatan);
-                if($request->name != ""){
-                    $kelas = $kelas->where("Nama","like","%".$request->name."%");
-                    $idGurus = Guru::where("Guru_Nama","LIKE","%".$request->name."%")->get();
-                    if(sizeof($idGurus) > 0){
-                        foreach ($idGurus as $item) {
-                            $kelas = $kelas->orWhere("Guru_ID",$item->Guru_ID);
-                        }
-                    }
-                }
-            }else{
-                if($request->name != ""){
-                    $kelas = Les::where("Nama","like","%".$request->name."%");
-                    $idGurus = Guru::where("Guru_Nama","LIKE","%".$request->name."%")->get();
-                    if(sizeof($idGurus) > 0){
-                        foreach ($idGurus as $item) {
-                            $kelas = $kelas->orWhere("Guru_ID",$item->Guru_ID);
-                        }
-                    }
+            }
+            if($request->edCari != ""){
+                $kelas = $kelas->where("Nama","LIKE","%".$request->edCari."%");
+                $idGurus = Guru::where("Guru_Nama","LIKE","%".$request->edCari."%")->get();
+                foreach ($idGurus as $item) {
+                    $kelas = $kelas->orWhere("Guru_ID",$item->Guru_ID);
                 }
             }
         }

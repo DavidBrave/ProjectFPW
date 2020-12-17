@@ -192,7 +192,7 @@
                 <a href="/murid_profil" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">account_box</i><p style="margin: 0px 0px 0px 35px; width: auto;">Profile saya</p></a>
                 <a href="/kelas_yg_diambil" class="waves-effect menu-item"><i class="material-icons" style="position: absolute; font-size: 30px;">school</i><p style="margin: 0px 0px 0px 35px; width: auto;">Kelas Saya</p></a>
                 <a href="/all_chat" class="waves-effect menu-item"><i class="material-icons" style="position: absolute; font-size: 30px;">chat</i><p style="margin: 0px 0px 0px 35px; width: auto;">Chat</p></a>
-                <a href="/logout" class="waves-effect menu-item bottom"><i class="material-icons" style="position: absolute; font-size: 30px;">exit_to_app</i><p style="margin: 0px 0px 0px 35px; width: auto;">Keluar</p></a>
+                <a href="/logout" class="waves-effect menu-item bottom"><i class="material-icons" style="position: absolute; font-size: 30px;">exit_to_app</i><p style="margin: 0px 0px 0px 35px; width: auto;">Log Out</p></a>
             </div>
         @endif
         @if (session("guruLogin"))
