@@ -47,9 +47,9 @@
         <ul class="collection with-header">
             <h4 style="color: black; margin: 20px;">Profile</h4>
             @if ($murid->Murid_Photo)
-                <img src="{{asset("storage/Photos/".$murid->Murid_Photo)}}" alt="" style="width: 150px; height: 150px; border-radius: 50%; margin: 20px; display: block; margin-left: auto; margin-right: auto;">
+                <img src="{{asset("foto/".$murid->Murid_Photo)}}" alt="" style="width: 150px; height: 150px; border-radius: 50%; margin: 20px; display: block; margin-left: auto; margin-right: auto;">
             @else
-                <img src="{{asset("storage/Photos/nophoto.png")}}" alt="" style="width: 150px; height: 150px; border-radius: 50%; margin: 20px; display: block; margin-left: auto; margin-right: auto;">
+                <img src="{{asset("foto/nophoto.png")}}" alt="" style="width: 150px; height: 150px; border-radius: 50%; margin: 20px; display: block; margin-left: auto; margin-right: auto;">
             @endif
             <form action="/murid_edit_profil" method="get">
                 <button class="btn waves-effect blue lighten-1" type="submit" name="btnEditProfil" value="1" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 50px; width: 120px; font-size: 12px; padding-left: 5px; padding-right: 5px;">Edit Profil<i class="material-icons right" style="margin-left: 5px;">edit</i></button>
