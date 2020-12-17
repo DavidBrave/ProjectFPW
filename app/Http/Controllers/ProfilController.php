@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Murid;
 use App\Rules\ConfirmPasswordRule;
 use App\Rules\isUsernameMuridUnique;
+use App\Tingkat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -47,13 +48,16 @@ class ProfilController extends Controller
         $tujuan_upload = 'foto';
         $file->move($tujuan_upload, $file->getClientOriginalName());
 
-        // $murid = Murid::find($request->session()->get("IDLogin"));
-        $murid->Murid_Username = $request->username;
-        $murid->Murid_Nama = $request->nama;
-        $murid->Murid_Email = $request->email;
-        $murid->Murid_Password = bcrypt($request->password);
-        $murid->Murid_Photo = $file->getClientOriginalName();
-        $murid->save();
+        $murid1 = Murid::find($murid->Murid_ID);
+        $murid1->Murid_Username = $request->username;
+        $murid1->Murid_Nama = $request->nama;
+        $murid1->Murid_Email = $request->email;
+        $murid1->Murid_Tingkat = $request->tingkatan;
+        $murid1->Murid_Password = bcrypt($request->password);
+        $murid1->Murid_Photo = $file->getClientOriginalName();
+        $murid1->update();
+
+        $request->session()->put("muridLogin",Murid::where("Murid_ID",$murid->Murid_ID)->first());
         return redirect("/murid_profil");
     }
 
@@ -69,19 +73,23 @@ class ProfilController extends Controller
             $murid = $request->session()->get("muridLogin");
             $username = $murid->Murid_Username;
             $nama = $murid->Murid_Nama;
+            $tingkatan = $murid->Murid_Tingkat;
             $email = $murid->Murid_Email;
             // $password = $murid->Murid_Password;
             $password = "";
             $photo = $murid->Murid_Photo;
         }
 
+        $tingkatans = Tingkat::all();
 
         return view("murid.components.EditProfil",[
             "username" => $username,
             "nama"=>$nama,
             "email"=>$email,
             "password"=>$password,
-            "photo"=>$photo
+            "photo"=>$photo,
+            "tingkatans"=>$tingkatans,
+            "tingkatan"=>$tingkatan
         ]);
     }
 }
