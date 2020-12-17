@@ -31,10 +31,6 @@
         top: -10px;
         right: 0px;
     }
-
-
-
-
     .table-wrapper{
             margin: 10px 200px 70px;
             box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
@@ -196,7 +192,12 @@
         .button_logout:hover {
             background: #e33b3b;
         }
-
+        #container-tabel{
+            overflow-y: scroll;
+            min-height: 450px;
+            max-height: 450px;
+            margin-top: 20px;
+        }
 </style>
 @if (session("message")!=null)
     <script>alert("{{session('message')}}");</script>
@@ -224,40 +225,30 @@
                 <button class="btn waves-effect tombol" type="submit" style="background-color: #42a5f5;">Insert<i class="material-icons right">edit</i></button>
             @endif
         </form>
-
+        <br><br>
+        <h4 style="text-align: center">List Pelajaran</h4>
+        <div id="container-tabel">
+            <table class="responsive-table striped">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Pelajaran Id</th>
+                        <th>Nama Pelajaran</th>
+                        <th>Total Les</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($list_pelajaran as $pelajaran)
+                        <tr>
+                            <td>{{ $pelajaran->no }}</td>
+                            <td>{{ $pelajaran->id }}</td>
+                            <td>{{ $pelajaran->name }}</td>
+                            <td>{{ $pelajaran->ctr }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-
-    <br><br><br>
-
-    <h4 style="text-align: center">List Pelajaran</h4>
-    <div class="table-wrapper">
-        <table class="fl-table">
-        <thead>
-            <tr>
-
-                <th>No.</th>
-                <th>Pelajaran Id</th>
-                <th>Nama Pelajaran</th>
-                <th>Total Les</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($list_pelajaran as $pelajaran)
-
-                <tr>
-                    <td>{{ $pelajaran->no }}</td>
-                    <td>{{ $pelajaran->id }}</td>
-                    <td>{{ $pelajaran->name }}</td>
-                    <td>{{ $pelajaran->ctr }}</td>
-
-                </tr>
-
-            @endforeach
-        </tbody>
-        </table>
-    </div>
-
-
 </div>
 @endsection

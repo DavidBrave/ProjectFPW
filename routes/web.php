@@ -74,12 +74,18 @@ Route::group(['middleware' => 'cek_murid'], function () {
 
 Route::prefix("admin")->group(function ()
 {
-    Route::get("/home", "AdminController@Home");
-    Route::get("/profile", "AdminController@Profile");
-    Route::get("/guru/baru", "AdminController@GuruBaru");
-    Route::post("/guru/baru", "AdminController@ActionGuruBaru");
-    Route::get("/insert/pelajaran", "AdminController@Pelajaran");
-    Route::post("/insert/pelajaran", "AdminController@InsertPelajaran");
-    Route::get("/insert/admin", "AdminController@Admin");
-    Route::post("/insert/admin", "AdminController@InsertAdmin");
+
+    Route::group(['middleware' => 'cek_admin'], function () {
+
+        Route::get("/home", "AdminController@Home");
+        Route::get("/profile", "AdminController@Profile");
+        Route::get("/guru/baru", "AdminController@GuruBaru");
+        Route::post("/guru/baru", "AdminController@ActionGuruBaru");
+        Route::get("/insert/pelajaran", "AdminController@Pelajaran");
+        Route::post("/insert/pelajaran", "AdminController@InsertPelajaran");
+        Route::get("/insert/admin", "AdminController@Admin");
+        Route::post("/insert/admin", "AdminController@InsertAdmin");
+        Route::get("/laporan", "AdminController@showChart");
+
+    });
 });

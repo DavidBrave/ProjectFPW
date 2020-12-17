@@ -31,10 +31,6 @@
         top: -10px;
         right: 0px;
     }
-
-
-
-
     .table-wrapper{
             margin: 10px 200px 70px;
             box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
@@ -196,7 +192,12 @@
         .button_logout:hover {
             background: #e33b3b;
         }
-
+        #container-tabel{
+            overflow-y: scroll;
+            min-height: 450px;
+            max-height: 450px;
+            margin-top: 20px;
+        }
 </style>
 @if (session("message")!=null)
     <script>alert("{{session('message')}}");</script>
@@ -204,67 +205,58 @@
 <script>
 </script>
 <div id="dld-container">
+    <div id="temp-dld">
+        <h3 style="text-align: center;" id="txtPersonal">Terima Guru Baru</h3><br>
+        <div id="container-tabel">
+            <table class="responsive-table striped">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Alamat</th>
+                        <th colspan="3">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($guru_baru as $guru)
+                        <tr>
+                            <td>{{ $guru->Guru_Username}}</td>
+                            <td>{{ $guru->Guru_Nama}}</td>
+                            <td>{{ $guru->Guru_Email }}</td>
+                            <td>{{ $guru->Guru_Alamat }}</td>
+                            <td>
+                                <form action="/admin/guru/baru" method="post">
+                                    @csrf
+                                    <input type="hidden" name="guru_id" value="{{$guru->Guru_ID}}">
+                                    <input type="hidden" name="type" value="detail">
+                                    <Button style="color: black">Detail</Button>
 
-    <h4 style="text-align: center">Terima Guru Baru</h4>
-    <div class="table-wrapper">
-        <table class="fl-table">
-        <thead>
-            <tr>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/admin/guru/baru" method="post">
+                                    @csrf
+                                    <input type="hidden" name="guru_id" value="{{$guru->Guru_ID}}">
+                                    <input type="hidden" name="type" value="accept">
+                                    <Button class="button_confirm">Terima</Button>
 
-                <th>Username</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Alamat</th>
-                <th colspan="3">Action</th>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/admin/guru/baru" method="post">
+                                    @csrf
+                                    <input type="hidden" name="guru_id" value="{{$guru->Guru_ID}}">
+                                    <input type="hidden" name="type" value="reject">
+                                    <Button class="button_reject">Tolak</Button>
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($guru_baru as $guru)
-
-                <tr>
-                    <td>{{ $guru->Guru_Username}}</td>
-                    <td>{{ $guru->Guru_Nama}}</td>
-                    <td>{{ $guru->Guru_Email }}</td>
-                    <td>{{ $guru->Guru_Alamat }}</td>
-                    <td>
-                        <form action="/admin/guru/baru" method="post">
-                            @csrf
-                            <input type="hidden" name="guru_id" value="{{$guru->Guru_ID}}">
-                            <input type="hidden" name="type" value="detail">
-                            <Button style="color: black">Detail</Button>
-
-                        </form>
-                    </td>
-
-                    <td>
-                        <form action="/admin/guru/baru" method="post">
-                            @csrf
-                            <input type="hidden" name="guru_id" value="{{$guru->Guru_ID}}">
-                            <input type="hidden" name="type" value="accept">
-                            <Button class="button_confirm">Terima</Button>
-
-                        </form>
-                    </td>
-
-                    <td>
-                        <form action="/admin/guru/baru" method="post">
-                            @csrf
-                            <input type="hidden" name="guru_id" value="{{$guru->Guru_ID}}">
-                            <input type="hidden" name="type" value="reject">
-                            <Button class="button_reject">Tolak</Button>
-
-                        </form>
-                    </td>
-
-                </tr>
-
-            @endforeach
-        </tbody>
-        </table>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-
-    <h5 style="color: green">Tolong H5 ini nanti dihapus. Detail Guru gak tak isi, karena aku gak tau kodingan profil guru yang mana. Dan kalo guru diterima, status = 1, Pending = 0, Ditolak = -1</h5>
-
 </div>
 @endsection

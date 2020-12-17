@@ -223,6 +223,8 @@
 
                 <a href="/admin/guru/baru" class="waves-effect menu-item top"><i class="material-icons" style="position: absolute; font-size: 30px;">school</i><p style="margin: 0px 0px 0px 35px; width: auto;">Terima Guru</p></a>
 
+                <a href="/admin/laporan" class="waves-effect menu-item bottom"><i class="material-icons" style="position: absolute; font-size: 30px;">show_chart</i><p style="margin: 0px 0px 0px 35px; width: auto;">Grafik</p></a>
+
                 <a href="/logout" class="waves-effect menu-item bottom"><i class="material-icons" style="position: absolute; font-size: 30px;">exit_to_app</i><p style="margin: 0px 0px 0px 35px; width: auto;">Keluar</p></a>
             </div>
         @endif

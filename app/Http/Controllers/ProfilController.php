@@ -45,8 +45,12 @@ class ProfilController extends Controller
         $this->validate($request,$rule,$customMessage);
 
         $file = $request->file('file');
-        $tujuan_upload = 'foto';
-        $file->move($tujuan_upload, $file->getClientOriginalName());
+        // $tujuan_upload = 'foto';
+        // $file->move($tujuan_upload, $file->getClientOriginalName());
+
+        $filename = pathinfo($request->file("file")->getClientOriginalName(), PATHINFO_FILENAME)."_".time().".".$request->file("file")->getClientOriginalExtension();
+        $request->file("file")->storeAs("public/photos", $filename);
+
 
         $murid1 = Murid::find($murid->Murid_ID);
         $murid1->Murid_Username = $request->username;
