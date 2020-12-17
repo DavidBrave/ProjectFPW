@@ -74,7 +74,8 @@ class AdminController extends Controller
 
 
         if ($request->type == "detail") {
-            #detail profile guru kalo perlu
+            $guru = Guru::where('Guru_ID', '=', $request->guru_id)->first();
+            return view('admin.profileGuru', ["guru" => $guru]);
         }
         if ($request->type == "accept") {
             Guru::where('Guru_ID', '=', $request->guru_id)->update(['Diterima' => 1]);

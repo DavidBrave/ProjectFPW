@@ -114,9 +114,13 @@ class LoginController extends Controller
             //return redirect('/murid_home');
             return redirect('/');
         }else if (Auth::guard('guru_guard')->attempt($dataGuru)){
-            $guru = Guru::where("Guru_Username", $request->username)->get();
-            $request->session()->put('guruLogin', $guru[0]);
-            return redirect('/');
+            $guru = Guru::where("Guru_Username", $request->username)->where("Diterima", 1)->get();
+            if(count($guru) > 0){
+                $request->session()->put('guruLogin', $guru[0]);
+                return redirect('/');
+            }else{
+                return redirect("/login")->with("pesan","Username atau password salah");
+            }
         }else if(Auth::guard('admin_guard')->attempt($dataAdmin)){
             $admin = Admin::where("Admin_Username", $request->username)->get();
             session()->put('adminLogin', $admin[0]);

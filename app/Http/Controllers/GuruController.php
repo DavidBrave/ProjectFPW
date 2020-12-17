@@ -38,7 +38,7 @@ class GuruController extends Controller
             'name' => ['required'],
             'pelajaran' => ['required'],
             'tingkatan' => ['required'],
-            'slot' => ['required', 'gt:5'],
+            'slot' => ['required', 'gte:5'],
             'waktu' => ['required']
         ];
         $customError = [
@@ -51,7 +51,7 @@ class GuruController extends Controller
         ];
         $this->validate($request, $rules, $customError);
 
-        $last = Les::all()->last();
+        $last = Les::withTrashed()->get()->last();
         $angka = (int)substr($last->Les_ID,3,4) + 1;
         $id = "";
         if($angka < 10){
