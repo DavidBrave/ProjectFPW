@@ -50,9 +50,9 @@
             <ul class="collection with-header">
                 <h4 style="color: black; margin: 20px;">Profile</h4>
                 @if ($photo)
-                    <img src="{{asset("foto/".$photo)}}" alt="" style="width: 150px; height: 150px; border-radius: 50%; margin: 20px; display: block; margin-left: auto; margin-right: auto;">
+                    <img src="{{asset("storage/Photos/".$photo)}}" alt="" style="width: 150px; height: 150px; border-radius: 50%; margin: 20px; display: block; margin-left: auto; margin-right: auto;">
                 @else
-                    <img src="{{asset("foto/nophoto.png")}}" alt="" style="width: 150px; height: 150px; border-radius: 50%; margin: 20px; display: block; margin-left: auto; margin-right: auto;">
+                    <img src="{{asset("storage/Photos/nophoto.png")}}" alt="" style="width: 150px; height: 150px; border-radius: 50%; margin: 20px; display: block; margin-left: auto; margin-right: auto;">
                 @endif
                 <input type="file" name="file" id="file2" style="display: block; margin-left: auto; margin-right: auto;"><br><br>
                 @error('file')
@@ -73,7 +73,7 @@
                         <span style="color: red">{{$message}}</span>
                     @enderror</p>
                 </li>
-                <li class="collection-item"><p style="width: 200px; float: left; margin: 0px;">Tingkatan</p><p style="float: left; margin: 0px;">
+                <li class="collection-item"><p style="width: 200px; float: left; margin: 0px;">Tingkatan</p><p style="width: 300px; float: left; margin: 0px;">
                     <select name="tingkatan" id="">
                         @foreach ($tingkatans as $item)
                             <option value="{{$item->Pendidikan_ID}}"
