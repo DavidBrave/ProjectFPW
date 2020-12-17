@@ -55,8 +55,7 @@ Route::get("/refresh/{id}", "ChatController@refreshChat");
 Route::get("/all_chat", "ChatController@showAllChat");
 
 //murid
-Route::group(['middleware' => 'cek_murid'], function ()
-{
+Route::group(['middleware' => 'cek_murid'], function () {
     Route::get('/murid_home', "HomeController@IndexHomeMurid");
     Route::get('/daftar_kelas', "KelasController@indexKelas");
     Route::get('/murid_detail_kelas', "KelasController@indexDetail");

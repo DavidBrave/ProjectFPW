@@ -23,7 +23,7 @@
         <h2>Daftar Kelas</h2><br><br>
         <form action="/courses" method="get">
             <div style="width: 30%;">
-                <input type="text" style="background-color: white; margin-right: 30px; height: 30px; padding-left: 5px; border-radius: 5px;" name="name" id="" placeholder="Cari berdasarkan nama les,nama guru">
+                <input type="text" style="background-color: white; margin-right: 30px; height: 30px; padding-left: 5px; border-radius: 5px;" name="edCari" id="" placeholder="Cari berdasarkan nama les,nama guru">
                 <br>
                 <select name="tingkatan" style="width: 50%;background-color: white;margin-right: 30px" id="">
                     <option value="none" selected disabled>Pilih Tingkatan</option>
@@ -34,8 +34,10 @@
                 <br>
                 @if (session("dark") == "true")
                     <button type="submit" value = "-1" class="btn waves-effect tombol" name="btnCari" style="background-color: #616161;">Cari</button>
+                    <button type="submit" class="btn waves-effect tombol" name="btnShowAll" style="background-color: #616161;">Show All</button>
                 @else
                     <button type="submit" value = "-1" class="btn waves-effect tombol" name="btnCari" style="background-color: #42a5f5;">Cari</button>
+                    <button type="submit" class="btn waves-effect tombol" name="btnShowAll" style="background-color: #42a5f5;">Show All</button>
                 @endif
             </div>
         </form>
