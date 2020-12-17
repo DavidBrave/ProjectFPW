@@ -23,7 +23,7 @@
         <h2>Daftar Kelas</h2><br><br>
         <form action="/courses" method="get">
             <div style="width: 30%;">
-                <input type="text" style="background-color: white; margin-right: 30px; height: 30px; padding-left: 5px; border-radius: 5px;" name="edCari" id="" placeholder="Cari berdasarkan nama les,nama guru">
+                <input type="text" style="background-color: white; margin-right: 30px; height: 30px; padding-left: 5px; border-radius: 5px;" name="name" id="" placeholder="Cari berdasarkan nama les,nama guru">
                 <br>
                 <select name="tingkatan" style="width: 50%;background-color: white;margin-right: 30px" id="">
                     <option value="none" selected disabled>Pilih Tingkatan</option>

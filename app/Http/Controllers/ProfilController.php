@@ -49,7 +49,7 @@ class ProfilController extends Controller
         // $file->move($tujuan_upload, $file->getClientOriginalName());
 
         $filename = pathinfo($request->file("file")->getClientOriginalName(), PATHINFO_FILENAME)."_".time().".".$request->file("file")->getClientOriginalExtension();
-        $request->file("file")->storeAs("public/photos", $filename);
+        $request->file("file")->storeAs("public/Photos", $filename);
 
 
         $murid1 = Murid::find($murid->Murid_ID);
@@ -58,7 +58,7 @@ class ProfilController extends Controller
         $murid1->Murid_Email = $request->email;
         $murid1->Murid_Tingkat = $request->tingkatan;
         $murid1->Murid_Password = bcrypt($request->password);
-        $murid1->Murid_Photo = $file->getClientOriginalName();
+        $murid1->Murid_Photo = $filename;
         $murid1->update();
 
         $request->session()->put("muridLogin",Murid::where("Murid_ID",$murid->Murid_ID)->first());

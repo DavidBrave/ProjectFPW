@@ -71,9 +71,9 @@
                 <div class="account" style="background-color: #616161;">
             @endif
                 @if (session("muridLogin")->Murid_Photo)
-                    <img src="{{asset("foto/".session('muridLogin')->Murid_Photo)}}" alt="" style="width: 40px; height: 40px; float: right; border-radius: 50%;">
+                    <img src="{{asset("storage/Photos/".session('muridLogin')->Murid_Photo)}}" alt="" style="width: 40px; height: 40px; float: right; border-radius: 50%;">
                 @else
-                    <img src="{{asset("foto/nophoto.png")}}" alt="" style="width: 40px; height: 40px; float: right;">
+                    <img src="{{asset("storage/Photos/nophoto.png")}}" alt="" style="width: 40px; height: 40px; float: right;">
                 @endif
                 <i class="material-icons" style="line-height: 40px;">expand_more</i>
                 <p class="txt-name">{{session("muridLogin")->Murid_Nama}}</p>

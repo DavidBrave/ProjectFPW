@@ -14,24 +14,50 @@ class KelasController extends Controller
     {
         // $idMurid = $request->session()->get("IDLogin");
         // $murid = Murid::find($idMurid)->get();
+        // $kelas = Les::select("*");
+        // if($request->btnCari == "-1"){
+        //     if($request->edCari != ""){
+        //         $kelas = Les::where("Nama","LIKE","%".$request->edCari."%");
+        //         $idGurus = Guru::where("Guru_Nama","LIKE","%".$request->edCari."%")->get();
+        //         if($idGurus!=null){
+        //             foreach ($idGurus as $item) {
+        //                 $kelas = $kelas->orWhere("Guru_ID",$item->Guru_ID);
+        //             }
+        //         }
+        //     }
+        //     if($request->tingkatan != "none"){
+        //         $kelas = $kelas->where("Tingkatan_ID",$request->tingkatan);
+        //     }
+        // }
+
+        // $tingkatan = Tingkat::all();
+
         $kelas = Les::select("*");
         if($request->btnCari == "-1"){
-            if($request->edCari != ""){
-                $kelas = Les::where("Nama","LIKE","%".$request->edCari."%");
-                $idGurus = Guru::where("Guru_Nama","LIKE","%".$request->edCari."%")->get();
-                if($idGurus!=null){
-                    foreach ($idGurus as $item) {
-                        $kelas = $kelas->orWhere("Guru_ID",$item->Guru_ID);
+            if($request->tingkatan != ""){
+                $kelas = $kelas->where("Tingkatan_ID",$request->tingkatan);
+                if($request->name != ""){
+                    $kelas = $kelas->where("Nama","like","%".$request->name."%");
+                    $idGurus = Guru::where("Guru_Nama","LIKE","%".$request->name."%")->get();
+                    if(sizeof($idGurus) > 0){
+                        foreach ($idGurus as $item) {
+                            $kelas = $kelas->orWhere("Guru_ID",$item->Guru_ID);
+                        }
+                    }
+                }
+            }else{
+                if($request->name != ""){
+                    $kelas = Les::where("Nama","like","%".$request->name."%");
+                    $idGurus = Guru::where("Guru_Nama","LIKE","%".$request->name."%")->get();
+                    if(sizeof($idGurus) > 0){
+                        foreach ($idGurus as $item) {
+                            $kelas = $kelas->orWhere("Guru_ID",$item->Guru_ID);
+                        }
                     }
                 }
             }
-            if($request->tingkatan != "none"){
-                $kelas = $kelas->where("Tingkatan_ID",$request->tingkatan);
-            }
         }
-
         $tingkatan = Tingkat::all();
-
         return view("murid.components.DaftarLes",[
             // "murid"=>$murid[0],
             "les"=>$kelas->get(),
