@@ -40,7 +40,7 @@ class KelasMuridController extends Controller
     public function muridKeluarKelas(Request $request)
     {
         $rating = $request->btnRate;
-        $les = Les::find($request->session()->get("IDLesDetail"))->first();
+        $les = Les::where("Les_ID", $request->session()->get("IDLesDetail"))->first();
         $ratingles = $les->Rating;
         $jumOrangRating = $les->Jum_Orang_Rating;
         $sisaSlot = $les->Sisa_Slot + 1;
@@ -51,7 +51,7 @@ class KelasMuridController extends Controller
         $les1->Rating = $ratingles;
         $les1->Jum_Orang_Rating = $jumOrangRating + 1;
         $les1->Sisa_Slot = $sisaSlot;
-        $les1->save();
+        $les1->update();
 
         // $murid = Murid::find($request->session()->get("IDLogin"));
         $murid = $request->session()->get("muridLogin");
